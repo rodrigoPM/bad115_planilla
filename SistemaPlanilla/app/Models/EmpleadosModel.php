@@ -67,6 +67,5 @@ class EmpleadosModel extends Model
             $id_string[count($id_string)] = strval($empleados[$i]['ID_EMPLEADO']);
         }
         return $id_string;
-        
     }
 }

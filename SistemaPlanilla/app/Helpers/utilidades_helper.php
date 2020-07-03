@@ -48,7 +48,7 @@ function crear_excel($cod_planilla, $p_rango){
     $excel->getProperties()
             ->setCreator("Sin Backup: grupo 09 Bad115");
     
-    $nombreDelDocumento ="Planilla_".$planilla['CODIGO'];
+    $nombreDelDocumento ="Planilla_".$planilla['CODIGO'].'.xlsx';
     $hoja = $excel->getActiveSheet();
 
     $hoja->setTitle($planilla['CODIGO']);
