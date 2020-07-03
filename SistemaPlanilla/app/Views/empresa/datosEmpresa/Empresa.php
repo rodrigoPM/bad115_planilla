@@ -50,9 +50,9 @@
       <!-- /.card-header -->
       <div class="card-body">
         <div class="row mb-3">
-          <div class="col-4">
+          <!-- <div class="col-4">
             <button type="button" class="btn  btn-success col-8" data-toggle="modal" data-target="#empresaModal" onclick="limpiar()">Nuevo</button>
-          </div>
+          </div>-->
           <div class="col-8">
             <form class="mr-0 ml-auto" action="<?= $url_buscar ?>" method="post">
               <div class="input-group input-group-md">
@@ -90,11 +90,11 @@
                 <td><?= $periodicidadModel->get($empresa['ID_PERIOCIDAD'])[0]['DESC_PERIOCIDAD']?></td>
 
                 <td class="row d-flex justify-content-around">
-                  <form action="<?= $url_eliminar ?>" method="post" class=" col-5">
+                   <!-- <form action="<?= $url_eliminar ?>" method="post" class=" col-5">
                     <?= csrf_field() ?>
                     <input type="hidden" name="ID_EMPRESA" value="<?= $empresa['ID_EMPRESA'] ?>">
                     <button class="btn btn-danger"><i class="icon fas fa-trash"></i></button>
-                  </form>
+                  </form>-->
                   <button class="btn btn-primary col-5" 
                   onclick="editar_estado(
                     <?= $empresa['ID_EMPRESA'] ?>,
@@ -161,6 +161,7 @@
 
                     <div class="form-group">
                     <label>Tabla Renta *</label>
+
                     <select name="ID_TABLA" id="ID_TABLA" class="form-control select2 " style="width: 100%;">
                         <?php foreach ($tablas as $index => $tabla) : ?>
                             <option value="<?= $tabla['ID_TABLA'] ?>"><?= $tabla['NOMBRE_TABLA'] ?></option>
