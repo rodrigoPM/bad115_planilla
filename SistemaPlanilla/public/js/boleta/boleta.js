@@ -37,3 +37,19 @@ function Buscar() {
      
    }
    }
+
+
+
+
+
+   $(document).on("click","tr td #imprimir",function(){ 
+    //codigo
+   
+  
+    var ident=   $(this).parents('tr').find('th.idelemento').text();
+    var codigo  =  $(this).parents('tr').find('td.codigo_p').text();
+
+    window.open('../boleta_pago/imprimir/'+ident+'/'+codigo+'/');
+  
+  
+      });

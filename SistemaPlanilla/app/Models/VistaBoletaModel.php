@@ -10,7 +10,7 @@ class VistaBoletaModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['ID_PLANILLA','CODIGO','ID_SUB_SECCION',
+    protected $allowedFields = ['liquido','id_empleado','ID_PLANILLA','CODIGO','ID_SUB_SECCION',
     'nombre_c','direccion','telefonos','NUMERO_DOCUMENTO','NOMBRE_CONCEPTO',
     'TIPO','MONTO'
 

@@ -6,6 +6,8 @@ use CodeIgniter\HTTP\Response;
 use App\Models\VistaBoletaModel;
 use CodeIgniter\Database\Query;
 use App\Models\EmpleadosModel;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 
 class Boleta_pago extends BaseController
@@ -17,15 +19,7 @@ class Boleta_pago extends BaseController
 
 
         
-  $empleados=new EmpleadosModel();
-
-  $datos=$empleados->select("CONCAT(NOMBRE_PRIMERO,' ', NOMBRE_SEGUNDO,' ' ,APELLIDO_PATERNO,' ',APELLIDO_MATERNO) as 'nombre_c',NUMERO_DOCUMENTO,CODIGO")
-  ->join('planillas', 'planillas.ID_PLANILLA =ID_PLANILLA')->where('codigo','ME-202008')->get();
-
-      $data = [
-        'boletas' =>$datos,
-    ];
-        return crear_plantilla(view('boleta/boleta',$data));
+         return crear_plantilla(view('boleta/boleta'));
     }
 
     public function view($par ='')
@@ -39,7 +33,7 @@ class Boleta_pago extends BaseController
 
         }else{
 
-            $datos=$empleados->select("CONCAT(NOMBRE_PRIMERO,' ', NOMBRE_SEGUNDO,' ' ,APELLIDO_PATERNO,' ',APELLIDO_MATERNO) as 'nombre_c',NUMERO_DOCUMENTO,CODIGO")
+            $datos=$empleados->select("CONCAT(NOMBRE_PRIMERO,' ', NOMBRE_SEGUNDO,' ' ,APELLIDO_PATERNO,' ',APELLIDO_MATERNO) as 'nombre_c',NUMERO_DOCUMENTO,CODIGO,ID_EMPLEADO")
             ->join('planillas', 'planillas.ID_PLANILLA =ID_PLANILLA')->where('codigo',$par)->get();
           
                 $data = [
@@ -50,16 +44,31 @@ class Boleta_pago extends BaseController
 
 
     }
-    public function delete($id = NULL)
+    public function imprimir($id = NULL,$codigo ='')
     {
-        $unidades = new UnidadesModel();
-     $unidades->delete($id);
-     $data = [
-        'unidades' => $unidades->get()
-    ];
+       
+        $boleta = new VistaBoletaModel();
+        $datos= $boleta->select("*")->where('ID_EMPLEADO',$id)->where('codigo',$codigo)->where('NOMBRE_CONCEPTO','SALARIO ORDINARIO')->get();
+        $detalles= $boleta->select("*")->where('ID_EMPLEADO',$id)->where('codigo',$codigo)->get();
 
-    
-   return view('empresa/unidades/busqueda', $data);
+        $data = [
+            'boletas' =>$datos,
+            'detalles'=>$detalles
+        ];
+
+
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+		$dompdf = new Dompdf($pdfOptions);
+		$dompdf->set_paper('letter', 'landscape');
+        $html = view('pdfs/boleta', $data);
+
+        $dompdf->loadHtml($html);
+        
+        $dompdf->render();
+        
+        return $dompdf->stream("boleta".$codigo.".pdf",array("Attachment" => false));
+
     }
 
 

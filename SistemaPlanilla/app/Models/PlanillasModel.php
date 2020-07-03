@@ -52,7 +52,7 @@ class PlanillasModel extends Model
     function get_codigo($periodo, $fecha){
         $planilla_codigos = $this->select('CODIGO')
                 ->where('ID_PERIOCIDAD', $periodo)
-                ->where('FECHA_PLANILLA', $fecha)->get();
+                ->where('DESDE_FECHA', $fecha)->get();
 
         if(count($planilla_codigos) != 1){
             return '';
