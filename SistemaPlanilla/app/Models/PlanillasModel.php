@@ -61,6 +61,10 @@ class PlanillasModel extends Model
         return $planilla_codigos[0]['CODIGO'];
     }
 
+    function get_planillas_abiertas(){
+        return $planillas = $this->where('ID_ESTATUS !=', 2)->findAll();
+    }
+
     function get_estatus($id){
         return ($this->find($id))['ID_ESTATUS'];
     }

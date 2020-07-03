@@ -15,7 +15,8 @@ class Pagos_programados extends BaseController
 		$pagos_programados  = ($pagos_programados == []) ? (new PagosProgramadosModel())->get() : $pagos_programados;
 
 		$data = [
-            'pagos_programados'  => $pagos_programados,
+			'pagos_programados'  => $pagos_programados,
+			'pagosModel'    => new PagosProgramadosModel(),
             'empleados'     => (new EmpleadosModel())->get(),
             'empleadosModel'=> new EmpleadosModel(),
             'ingresosDescuentosModel'=> new IngresosDescuentosModel(),

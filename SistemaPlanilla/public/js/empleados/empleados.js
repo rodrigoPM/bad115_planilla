@@ -6,7 +6,6 @@ function editar_estado(
     APELLIDO_PATERNO,
     APELLIDO_MATERNO,
     FECHA_NACIMIENTO,
-    // DIRECCION,
     NUMERO_DOCUMENTO,
     FECHA_EXPEDICION,
     NIT,
@@ -17,8 +16,6 @@ function editar_estado(
     SALARIO,
     CORREO_ELECTRONICO_INSTITUCIONAL,
     CORREO_ELECTRONICO_PERSONAL,
-    /* TELEFONO,
-    TELEFONO_MOVIL, */
     HORARIO_TRABAJO,
     ID_PUESTO,
     ID_PROFESION_OFICIO,
@@ -29,8 +26,10 @@ function editar_estado(
     ID_AFP,
     ID_ESTADO,
     ID_MUNICIPIO,
-    ID_EMPLEADO_JEFE
+    ID_EMPLEADO_JEFE = 0
 ) {
+    console.log('dentro de editar');
+    
     limpiar_validaciones();
     $('#ID_PUESTO').val(ID_PUESTO);
     $('#ID_PUESTO').trigger('change');
