@@ -14,9 +14,8 @@ use App\Models\EstatusPlanillasModel;
 use App\Models\TiposContratacionModel;
 
 
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use PhpOffice\PhpSpreadsheet\IOFactory;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class Generar_planilla extends BaseController
 {
@@ -66,6 +65,34 @@ class Generar_planilla extends BaseController
 
 	public function descargar_pdf(){
 
+		$planilla_codigo = $this->codigo_planilla();
+		$id_planilla = (new PlanillasModel())->get_id_planilla_by_codigo($planilla_codigo);
+		$planilla = ((new PlanillasModel())->get($id_planilla))[0];
+		$detalles_planillas = (new DetallesPlanillasModel())->get_destalles($id_planilla);
+		$rango = $this->get_rango();	
+
+		$data = [
+            'periodicidad'  	=> (new PeriodicidadPlanillaModel())->get_descripcion((new EmpresaModel)->get_periodicidad(1)),
+			'planilla'      	=> $planilla,
+			'estatus'       	=> (new EstatusPlanillasModel())->get_nombre((new PlanillasModel())->get_estatus($id_planilla)),
+			'detalles_planillas'=> $detalles_planillas,
+			'contratacionModel' =>new TiposContratacionModel(),
+			'empleadosModel'	=> new EmpleadosModel(),
+			'rango'         	=> $rango,
+		];
+		
+
+		$pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+		$dompdf = new Dompdf($pdfOptions);
+		$dompdf->set_paper('letter', 'landscape');
+        $html = view('pdfs/planilla', $data);
+
+        $dompdf->loadHtml($html);
+        
+        $dompdf->render();
+        
+        return $dompdf->stream("planilla".date('d-m-Y_g-i-a').".pdf");
 	}
 
 	public function descargar_excel(){
@@ -113,7 +140,8 @@ class Generar_planilla extends BaseController
 		$planilla_codigo = $this->codigo_planilla();
 		$exito = false;
 		
-
+		// var_dump($planilla_codigo);
+		// return;
 		if($planilla_codigo != ''){ //la planilla ya existe
 			$this->calcular_planilla(true);
 			$operacion = $op;
@@ -145,7 +173,7 @@ class Generar_planilla extends BaseController
 		}
 		$fecha_inicio = date('Y-m-').strval($inicio);//fecha de inicio: las mensuales en 01 y las quincenales en 01 o 16
 		$planilla_codigo = (new PlanillasModel())->get_codigo((new EmpresaModel)->get_periodicidad(1),$fecha_inicio);
-
+		
 		return $planilla_codigo;
 	}
 

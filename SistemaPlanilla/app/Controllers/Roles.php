@@ -22,10 +22,38 @@ class Roles extends BaseController
         $db = \Config\Database::connect();
         $rol = session()->get('ID_ROL');
 
-        $menus = $db->query("SELECT MENUS.ID_MENU, MENUS.ID_ICONO, MENUS.NOMBRE_MENU FROM menus
-            INNER JOIN permisos ON MENUS.ID_MENU = permisos.ID_MENU
-            INNER JOIN roles ON permisos.ID_ROL = roles.ID_ROL
-            WHERE roles.ID_ROL = ". $db->escape($rol) ." AND menus.ID_MENU_PADRE IS NULL");
+        $query = $db->query("SELECT MENUS.ID_MENU, MENUS.ID_ICONO, MENUS.NOMBRE_MENU, ICONOS.NOMBRE_ICONO
+                FROM MENUS
+                INNER JOIN ICONOS ON ICONOS.ID_ICONO = MENUS.ID_ICONO
+                WHERE MENUS.ID_MENU_PADRE IS NULL");
+        foreach($query->getResult() as $query) {
+                $submenus = $db->query(" 
+
+                    SELECT MENUS.ID_MENU, MENUS.ID_MENU_PADRE, MENUS.NOMBRE_MENU, MENUS.ID_ICONO, MENUS.RUTA_MENU , ICONOS.NOMBRE_ICONO 
+                    FROM MENUS
+                    INNER JOIN ICONOS ON ICONOS.ID_ICONO = MENUS.ID_ICONO
+                    WHERE MENUS.ID_MENU_PADRE = ". $db->escape($query->ID_MENU) ."
+                ");
+
+                $menus["$query->ID_MENU"] = array(
+                    'ID_MENU'       => $query->ID_MENU,
+                    'NOMBRE_MENU'   => $query->NOMBRE_MENU,
+                    'ID_ICONO'      => $query->ID_ICONO,
+                    'NOMBRE_ICONO'  => $query->NOMBRE_ICONO,
+                );
+
+                foreach ($submenus->getResult() as $submenu) {
+                    $menus["$query->ID_MENU"]["submenus"]["$submenu->ID_MENU"] = array(
+                        "ID_MENU"       => $submenu->ID_MENU,
+                        "NOMBRE_MENU"   => $submenu->NOMBRE_MENU,
+                        "ID_ICONO"      => $submenu->ID_ICONO,
+                        "NOMBRE_ICONO"  => $submenu->NOMBRE_ICONO,
+                        "ID_MENU_PADRE" => $submenu->ID_MENU_PADRE,
+                        "RUTA_MENU"     => $submenu->RUTA_MENU,
+                    );
+                }
+            }
+
        
         $data = [
             'roles' =>$datos,
@@ -75,6 +103,15 @@ class Roles extends BaseController
             'ID_ROL' => strtoupper($this->request->getVar('ID_ROL')),
             'NOMBRE_ROL' =>strtoupper( $this->request->getVar('NOMBRE_ROL'))
         ]);
+
+        $rol = $this->request->getVar('ID_ROL');
+        foreach($this->request->getVar('menu[]') as $menu)
+        {
+            (new PermisosModel())->save([
+                'ID_ROL'    => $rol,
+                'ID_MENU'   => $menu,
+            ]);
+        }
         $roles = new RolesModel();
         $data = [
            'roles' => $roles->get()

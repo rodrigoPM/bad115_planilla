@@ -56,6 +56,8 @@
                 <form  id="formulario" >
 
                     <input type="hidden" name="ID_ROL" id="ID_ROL">
+                    <input type="hidden" id="cantMenus" value="<?= count($menus)?>">
+                    <input type="text" id="res">
                     <div class="form-group">
                         <label for="">Nombre del Rol</label>
                         <input name="NOMBRE_ROL" id="NOMBRE_ROL" onkeyup="validar_nombre(this)" onblur="validar_nombre(this)" type="text" class="form-control" id="" placeholder="Nombre del rol">
@@ -63,15 +65,28 @@
                             El nombre no debe comenzar con números ni caracteres especiales
                         </div>
                     </div>
-                    <h4>Menú</h4>
-                    <?php foreach ($menus->getResultArray() as $index => $menus) : ?>
-                      <div class="form-group">
+                    <label for="">Menús</label>
+                    <?php foreach ($menus as $index => $menus) : ?>
+                      <div class="card card-body" id="">
+                      <div class="form-group card-header">
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="show-child" value="<?= $menus["ID_MENU"] ?>">
-                          <label class="form-check-label"><?= $menus["NOMBRE_MENU"] ?></label>
+                          <input class="form-check-input padre<?= $index?>" type="checkbox" id="menu-padre" name="menu[]" value="<?= $menus["ID_MENU"] ?>">
+                          <label class="form-check-label"><strong><?= $menus["NOMBRE_MENU"] ?></strong></label>
                         </div>
                       </div>
-                    
+                      <br>
+                      <div class="row">
+                      <?php foreach ($menus['submenus'] as $submenu): ?>
+                        <div class="form-group col-lg-3 col-6">
+                          <div class="form-check">
+                            <input class="form-check-input hijo<?=$index?>" type="checkbox" name="menu[]" id="menu-hijo" value="<?= $submenu["ID_MENU"] ?>">
+                            <label class="form-check-label"><?= $submenu["NOMBRE_MENU"] ?></label>
+                          </div>
+                        </div>
+                      <?php endforeach ?>
+                      </div>
+                      </div>
+                      <br><br>
                     <?php endforeach ?>
 
                     <button id="btn_submit" disabled type="submit" class="btn btn-success btn-block">Guardar</button>
@@ -82,3 +97,21 @@
 </div>
 
 <script src="<?= base_url() ?>/js/roles/roles.js"></script>
+
+
+<!--
+<script>
+
+
+let num = document.getElementById("cantMenus").value;
+document.getElementById("res").value = num;
+
+/*
+  $(".padre"+i).change(function(){
+  $(".hijo"+i).prop("checked", $(this).prop("checked"))
+})
+let cl = $($('.nav').find('a.current')).parent().attr('class');
+/*
+
+</script>
+-->

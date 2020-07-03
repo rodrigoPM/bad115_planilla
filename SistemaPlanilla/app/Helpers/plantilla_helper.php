@@ -99,40 +99,76 @@ function crear_sidebar(
         $db = \Config\Database::connect();
         $rol = session()->get('ID_ROL');
 
-        $query = $db->query("SELECT MENUS.ID_MENU, MENUS.ID_ICONO, MENUS.NOMBRE_MENU, ICONOS.NOMBRE_ICONO
-            FROM MENUS
-            INNER JOIN ICONOS ON ICONOS.ID_ICONO = MENUS.ID_ICONO
-            INNER JOIN PERMISOS ON MENUS.ID_MENU = PERMISOS.ID_MENU
-            INNER JOIN ROLES ON PERMISOS.ID_ROL = ROLES.ID_ROL
-            WHERE ROLES.ID_ROL = ". $db->escape($rol) ." AND MENUS.ID_MENU_PADRE IS NULL");
+        if (session()->get('ID_USUARIO') == 1) {
 
-        foreach($query->getResult() as $query) {
-            $submenus = $db->query(" 
+            $query = $db->query("SELECT MENUS.ID_MENU, MENUS.ID_ICONO, MENUS.NOMBRE_MENU, ICONOS.NOMBRE_ICONO
+                FROM MENUS
+                INNER JOIN ICONOS ON ICONOS.ID_ICONO = MENUS.ID_ICONO
+                WHERE MENUS.ID_MENU_PADRE IS NULL");
 
-                SELECT MENUS.ID_MENU, MENUS.ID_MENU_PADRE, MENUS.NOMBRE_MENU, MENUS.ID_ICONO, MENUS.RUTA_MENU , iconos.NOMBRE_ICONO 
-                FROM menus
-                INNER JOIN iconos ON MENUS.ID_ICONO = iconos.ID_ICONO
-                INNER JOIN permisos ON MENUS.ID_MENU = permisos.ID_MENU
-                INNER JOIN roles ON permisos.ID_ROL = roles.ID_ROL
-                WHERE MENUS.ID_MENU_PADRE = ". $db->escape($query->ID_MENU) ." 
-                AND permisos.ID_ROL = ". $db->escape($rol) ."
-               
+            foreach($query->getResult() as $query) {
+                $submenus = $db->query(" 
+
+                    SELECT MENUS.ID_MENU, MENUS.ID_MENU_PADRE, MENUS.NOMBRE_MENU, MENUS.ID_ICONO, MENUS.RUTA_MENU , ICONOS.NOMBRE_ICONO 
+                    FROM MENUS
+                    INNER JOIN ICONOS ON ICONOS.ID_ICONO = MENUS.ID_ICONO
+                    WHERE MENUS.ID_MENU_PADRE = ". $db->escape($query->ID_MENU) ."
+                ");
+
+                $menus["$query->ID_MENU"] = array(
+                    'NOMBRE_MENU'   => $query->NOMBRE_MENU,
+                    'ID_ICONO'      => $query->ID_ICONO,
+                    'NOMBRE_ICONO'  => $query->NOMBRE_ICONO,
+                );
+
+                foreach ($submenus->getResult() as $submenu) {
+                    $menus["$query->ID_MENU"]["submenus"]["$submenu->ID_MENU"] = array(
+                        "NOMBRE_MENU"   => $submenu->NOMBRE_MENU,
+                        "ID_ICONO"      => $submenu->ID_ICONO,
+                        "NOMBRE_ICONO"  => $submenu->NOMBRE_ICONO,
+                        "ID_MENU_PADRE" => $submenu->ID_MENU_PADRE,
+                        "RUTA_MENU"     => $submenu->RUTA_MENU,
+                    );
+                }
+            }
+
+        } else {
+
+            $query = $db->query("SELECT MENUS.ID_MENU, MENUS.ID_ICONO, MENUS.NOMBRE_MENU, ICONOS.NOMBRE_ICONO
+                FROM MENUS
+                INNER JOIN ICONOS ON ICONOS.ID_ICONO = MENUS.ID_ICONO
+                INNER JOIN PERMISOS ON MENUS.ID_MENU = PERMISOS.ID_MENU
+                INNER JOIN ROLES ON PERMISOS.ID_ROL = ROLES.ID_ROL
+                WHERE ROLES.ID_ROL = ". $db->escape($rol) ." AND MENUS.ID_MENU_PADRE IS NULL
             ");
 
-            $menus["$query->ID_MENU"] = array(
-                'NOMBRE_MENU'   => $query->NOMBRE_MENU,
-                'ID_ICONO'      => $query->ID_ICONO,
-                'NOMBRE_ICONO'  => $query->NOMBRE_ICONO,
-            );
+            foreach($query->getResult() as $query) {
+                $submenus = $db->query(" 
 
-            foreach ($submenus->getResult() as $submenu) {
-                $menus["$query->ID_MENU"]["submenus"]["$submenu->ID_MENU"] = array(
-                    "NOMBRE_MENU"   => $submenu->NOMBRE_MENU,
-                    "ID_ICONO"      => $submenu->ID_ICONO,
-                    "NOMBRE_ICONO"  => $submenu->NOMBRE_ICONO,
-                    "ID_MENU_PADRE" => $submenu->ID_MENU_PADRE,
-                    "RUTA_MENU"     => $submenu->RUTA_MENU,
+                    SELECT MENUS.ID_MENU, MENUS.ID_MENU_PADRE, MENUS.NOMBRE_MENU, MENUS.ID_ICONO, MENUS.RUTA_MENU , ICONOS.NOMBRE_ICONO 
+                    FROM menus
+                    INNER JOIN ICONOS ON MENUS.ID_ICONO = ICONOS.ID_ICONO
+                    INNER JOIN PERMISOS ON MENUS.ID_MENU = PERMISOS.ID_MENU
+                    INNER JOIN ROLES ON PERMISOS.ID_ROL = ROLES.ID_ROL
+                    WHERE MENUS.ID_MENU_PADRE = ". $db->escape($query->ID_MENU) ." 
+                    AND PERMISOS.ID_ROL = ". $db->escape($rol) ."
+                ");
+
+                $menus["$query->ID_MENU"] = array(
+                    'NOMBRE_MENU'   => $query->NOMBRE_MENU,
+                    'ID_ICONO'      => $query->ID_ICONO,
+                    'NOMBRE_ICONO'  => $query->NOMBRE_ICONO,
                 );
+
+                foreach ($submenus->getResult() as $submenu) {
+                    $menus["$query->ID_MENU"]["submenus"]["$submenu->ID_MENU"] = array(
+                        "NOMBRE_MENU"   => $submenu->NOMBRE_MENU,
+                        "ID_ICONO"      => $submenu->ID_ICONO,
+                        "NOMBRE_ICONO"  => $submenu->NOMBRE_ICONO,
+                        "ID_MENU_PADRE" => $submenu->ID_MENU_PADRE,
+                        "RUTA_MENU"     => $submenu->RUTA_MENU,
+                    );
+                }
             }
         }
     }

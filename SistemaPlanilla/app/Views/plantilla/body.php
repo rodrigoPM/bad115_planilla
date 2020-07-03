@@ -51,14 +51,16 @@
   <script src="<?= base_url() ?>/plugins/dashboard.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="<?= base_url() ?>/plugins/demo.js"></script>
-  <!-- sweet alert -->
-  <script src="<?= base_url() ?>/plugins/package/dist/sweetalert2.min.js"></script>
 
   <!-- DataTables -->
   <script src="<?= base_url() ?>/plugins/datatables/jquery.dataTables.min.js"></script>
   <script src="<?= base_url() ?>/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
   <script src="<?= base_url() ?>/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
   <script src="<?= base_url() ?>/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
+   <!-- Full Calendar -->
+   <script src="<?= base_url() ?>/plugins/fullcalendar/main.js"></script>
+   <script src="<?= base_url() ?>/plugins/fullcalendar/locales-all.min.js"></script>
 
   <script>
     $(function() {

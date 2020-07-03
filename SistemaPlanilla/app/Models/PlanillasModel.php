@@ -52,13 +52,17 @@ class PlanillasModel extends Model
     function get_codigo($periodo, $fecha){
         $planilla_codigos = $this->select('CODIGO')
                 ->where('ID_PERIOCIDAD', $periodo)
-                ->where('FECHA_PLANILLA', $fecha)->get();
+                ->Where('DESDE_FECHA', $fecha)->get();
 
         if(count($planilla_codigos) != 1){
             return '';
         }
 
         return $planilla_codigos[0]['CODIGO'];
+    }
+
+    function get_planillas_abiertas(){
+        return $planillas = $this->where('ID_ESTATUS !=', 2)->findAll();
     }
 
     function get_estatus($id){

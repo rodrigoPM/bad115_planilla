@@ -26,4 +26,16 @@ class PuestosTrabajoModel extends Model
             return [$this->find($id)];
         }
     }
+
+    function buscar($termino){ //busqueda de ids, retorno ids en formato string
+        $puestos = $this->select('ID_PUESTO')
+                ->like('DESCRIPCION_PUESTO', $termino)
+                ->findAll();
+        $id_string = (count($puestos) != 0)? []:['0'];
+        for ($i=0; $i < count($puestos); $i++) { 
+            $id_string[count($id_string)] = strval($puestos[$i]['ID_PUESTO']);
+        }
+        return $id_string;
+    }
+
 }

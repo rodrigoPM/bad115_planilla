@@ -21,7 +21,7 @@ class Descuentos_eventuales extends BaseController
             'empleadosModel'=> new EmpleadosModel(),
             'ingresosDescuentosModel'=> new IngresosDescuentosModel(),
             'descuentos'   => (new IngresosDescuentosModel())->get_descuentos(),
-            'planillas'    => (new PlanillasModel())->get(),
+            'planillas'    => (new PlanillasModel())->get_planillas_abiertas(),
             'planillasModel'=> new PlanillasModel(),
 			'operacion'		=> $operacion,
 			'exito' 		=> $exito,
