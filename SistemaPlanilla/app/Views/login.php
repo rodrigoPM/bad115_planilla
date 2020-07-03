@@ -33,7 +33,7 @@
 
       <form action="<?= base_url().'/login/inicio' ?>" method="post">
         <div class="input-group mb-3">
-          <input type="text" name="USUARIO" id="USUARIO" class="form-control" placeholder="Usuario" value="" required="true">
+          <input type="text" name="USUARIO" id="USUARIO" class="form-control" placeholder="Usuario" value="" required="true" autofocus="true">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>

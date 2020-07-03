@@ -26,17 +26,43 @@ class Login extends BaseController
 
         $user = $this->existe($usuario, $contrasenia);
 
-    	if(isset($user))
+        if(isset($user))
         {
-            if($user['ACTIVO'] == 1) {
-                $this->setUserMethod($user);
-                return redirect()->to(base_url() . '/dashboard');
-            }
-            else {
-                session()->setFlashdata('msg_error', 'Usuario inactivo. Contacte al administrador');
-            return redirect()->to(base_url() . '/login');
-            }
-            
+            if(password_verify($this->request->getPost('CONTRASENIA'), $user['CONTRASENIA']) == true) {
+                if($user['ACTIVO'] == 1) {
+                    $this->setUserMethod($user);
+                    return redirect()->to(base_url() . '/dashboard');
+                }
+                else {
+                    session()->setFlashdata('msg_error', 'Usuario inactivo. Contacte al administrador');
+                    return redirect()->to(base_url() . '/login');
+                }
+            } else {
+                if (session()->get('ATTEMPT') == 0) {
+                    $data = [
+                        'ID_USUARIO'    => $user["ID_USUARIO"],
+                        'ATTEMPT'       => 0,
+                    ];
+                    session()->set($data);
+                }
+                if(session()->get('ID_USUARIO') == $user["ID_USUARIO"]) {
+                    $attempt = session()->get('ATTEMPT') + 1;
+                    session()->set('ATTEMPT', $attempt);
+                } else {
+                    session()->set('ATTEMPT', 1);
+                    session()->set('ID_USUARIO', $user["ID_USUARIO"]);
+                }
+
+                if(session()->get('ATTEMPT') > 2)
+                {
+                    $db = \Config\Database::connect();
+                    $db->query("UPDATE USUARIOS SET ACTIVO = 0 WHERE USUARIOS.ID_USUARIO = ".$db->escape($user["ID_USUARIO"]));
+                    session()->setFlashdata('msg_error', 'Cuenta Bloqueada. Ha superado el máximo de intentos permitidos');
+                    return redirect()->to(base_url() . '/login');
+                }
+                session()->setFlashdata('msg_error', 'Usuario o Contraseña incorrectos!!');
+                return redirect()->to(base_url() . '/login');
+            }  
         }
         else{
             session()->setFlashdata('msg_error', 'Usuario o Contraseña incorrectos');
@@ -48,7 +74,7 @@ class Login extends BaseController
     {
         $user = (new UsuariosModel())->where('USUARIO', $usuario)->first();
         if (isset($user)) {
-            return password_verify($this->request->getPost('CONTRASENIA'), $user['CONTRASENIA']) == true ? $user : NULL; 
+            return $user; 
         } else {
             return NULL;
         }
