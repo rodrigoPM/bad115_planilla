@@ -1,96 +1,100 @@
-<?php
 
-# definimos los valores iniciales para nuestro calendario
+<style>
 
-$month=date("n");
+  #calendar {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+</style>
 
-$year=date("Y");
+  <div id='calendar' class="mb-5"></div>
 
-$diaActual=date("j");
+  <script>      
+      let my_events = <?= $eventos?>;
+      function eliminar(arg){
+        Swal.fire({
+          title: 'Eliminar?',
+          text: "El evento sera eliminado permanentemente!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          cancelButtonText: 'Cancelar',
+          confirmButtonText: 'Si, Eliminar'
+        }).then((result) => {
+          if (result.value) {
+            $.post("<?= $url_eliminar?>",
+                {
+                    'ID_EVENTO': arg.event._def.publicId,
+                },
+                function(data, status){
+                    console.log(data);
+                    if(status == 'success'){
+                      arg.event.remove()
 
-# Obtenemos el dia de la semana del primer dia
-# Devuelve 0 para domingo, 6 para sabado
-$diaSemana=date("w",mktime(0,0,0,$month,1,$year))+7;
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Eliminacion Exitosa',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
+                });
+          }
+        })
 
-# Obtenemos el ultimo dia del mes
-$ultimoDiaMes=date("d",(mktime(0,0,0,$month+1,1,$year)-1));
+      }
 
-$meses=array(1=>"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
-"Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
-?>
+      function get_fecha(fecha){
+        let year = fecha.getFullYear();
+        let mes = fecha.getMonth() +1;
+        let dia = fecha.getDate();
+        return year + '-' +mes + '-'+dia;
+      }
 
- 
+      function crear(arg){
+        Swal.fire({
+            title: 'Titulo del evento',
+            input: 'text',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Crear',
+            showLoaderOnConfirm: true,
+            preConfirm: (titulo) => {
+                $.post("<?= $url_guardar?>",
+                {
+                    'FECHA_INICIO': get_fecha(arg.start),
+                    'FECHA_FIN':  get_fecha(arg.end),
+                    'TITULO': titulo,
+                },
+                function(data, status){
+                    console.log(data);
+                    if(status == 'success'){
+                        calendar.addEvent({
+                            id : data,
+                            title: titulo,
+                            start: arg.start,
+                            end: arg.end,
+                            allDay: arg.allDay
+                        })
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-	<title>Ejemplo de un simple calendario en PHP</title>
-	<meta charset="utf-8">
-	<style>
-		#calendar {
-			font-family:Arial;
-		}
-		#calendar caption {
-			text-align:left;
-			padding:5px 10px;
-			background-color:#003366;
-			color:#fff;
-			font-weight:bold;
-		}
-		#calendar th {
-			background-color:#006699;
-			color:#fff;
-			width:40px;
-		}
-		#calendar td {
-			text-align:right;
-			padding:2px 5px;
-			background-color:silver;
-		}
-		#calendar .hoy {
-			background-color:green;
-		}
-        td{
-            height: 5em;
-        }
-	</style>
-</head>
-<body>
-<!-- <h1>Ejemplo de un simple calendario en PHP</h1> -->
-<h1><?php echo $meses[$month]." ".$year?></h1>
-<table id="calendar" style="font-size:1em" class="w-100 text-align-justify">  
-	<tr>
-		<th>Lunes</th><th>Martes</th><th>Miércoles</th><th>Jueves</th>
-		<th>Viernes</th><th>Sábado</th><th>Domingo</th>
-	</tr>
-	<tr bgcolor="silver">
-		<?php
-		$last_cell=$diaSemana+$ultimoDiaMes;
-		// hacemos un bucle hasta 42, que es el máximo de valores que puede
-		// haber... 6 columnas de 7 dias
-		for($i=1;$i<=42;$i++){
-			if($i==$diaSemana){
-				// determinamos en que dia empieza
-				$day=1;
-			}
-			if($i<$diaSemana || $i>=$last_cell){
-				// celca vacia
-				echo "<td>&nbsp;</td>";
-			}else{
-				// mostramos el dia
-				if($day==$diaActual)
-					echo "<td class='hoy'>$day</td>";
-				else
-					echo "<td><p> $day</p></td>";
-				$day++;
-			}
-			// cuando llega al final de la semana, iniciamos una columna nueva
-			if($i%7==0){
-				echo "</tr><tr>\n";
-			}
-		}
-	?>
-	</tr>
-</table>
-</body>
-</html>
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Exito',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
+                    
+                });
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        });
+        calendar.unselect()
+      }     
+  </script>

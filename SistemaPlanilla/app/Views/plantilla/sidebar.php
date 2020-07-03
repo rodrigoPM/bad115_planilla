@@ -38,7 +38,7 @@
 
             <?php foreach ($menu['submenus'] as $submenu): ?>
                 <li class="nav-item">
-                  <a href="<?=$submenu['RUTA_MENU'] ?>" class="nav-link">
+                  <a href="<?= base_url().'/'.$submenu["RUTA_MENU"] ?>" class="nav-link">
                     <i class="fas fa-arrow-alt-circle-right nav-icon"></i>
                     <p><?= $submenu['NOMBRE_MENU']?></p>
                   </a>

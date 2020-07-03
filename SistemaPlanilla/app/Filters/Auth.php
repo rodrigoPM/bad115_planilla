@@ -11,6 +11,7 @@ class Auth implements FilterInterface
         if (session()->get('LOGUEADO') !== true) {
 			return redirect()->to(base_url() . '/login/unauthorized');
 		}
+        
     }
 
     //--------------------------------------------------------------------

@@ -10,29 +10,35 @@ use App\Models\EventosModel;
 
 class Calendario extends BaseController
 {
+    protected function mis_eventos($array_eventos){
+        $array = [];
+        foreach($array_eventos as $evento){
+            $array[count($array)] = [
+                'id'     => $evento['ID_EVENTO'],
+                'title'  => $evento['TITULO'],
+                'start'  => $evento['FECHA_INICIO'],
+                'end'    => $evento['FECHA_FIN']
+            ];
+        }
+
+        return json_encode($array, true);
+    }
 
 	protected function data_vista($operacion = '', $exito = false, $eventos = [], $termino = '')
 	{
-        $eventos  = ($eventos == []) ? (new EventosModel())->get() : $eventos;
-        
+        $eventos  = ($eventos == []) ? $this->mis_eventos((new EventosModel())->get()) : $eventos;
 
 		$data = [
             'eventos'    => $eventos,
-            'empleados'     => (new EmpleadosModel())->get(),
-            'empleadosModel'=> new EmpleadosModel(),
-            'tipoAccionModel'=> new TipoAccionPersonalModel(),
-            'tipo_accion'   => (new TipoAccionPersonalModel())->get(),
 			'operacion'		=> $operacion,
 			'exito' 		=> $exito,
             'nombre_obj'    => 'Calendario',
             'url_guardar'	=> base_url() . '/calendario/crear',
 			'url_eliminar'  => base_url() . '/calendario/eliminar',
-			'url_buscar'    => base_url() . '/calendario/buscar',
-
 		];
 		return crear_head('Calendario')
 			. crear_body(
-				view('calendario/calendario1', $data),               //main
+				view('calendario/calendario', $data),               //main
 				'',                                           //sidebar
 				crear_breadcrumb('Calendario', crear_ruta_breadcrumb('Calendario')),   //breadcrumb
 				['calendario/calendario.js']

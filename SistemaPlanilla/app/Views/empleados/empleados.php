@@ -405,7 +405,7 @@
                 </div>
                 <div class="form-group">
                     <label>Jefe De Empleado</label>
-                    <select required name="ID_EMPLEADO_JEFE" id="ID_EMPLEADO_JEFE" class="form-control select2 " style="width: 100%;">
+                    <select name="ID_EMPLEADO_JEFE" id="ID_EMPLEADO_JEFE" class="form-control select2 " style="width: 100%;">
                         <?php foreach ($empleados as $index => $empleado) : ?>
                             <option value="<?= $empleado['ID_EMPLEADO'] ?>">
                                 <?= $empleado['APELLIDO_PATERNO'] . ' ' . $empleado['APELLIDO_MATERNO'] . ',' . $empleado['NOMBRE_PRIMERO'] . ' ' . $empleado['NOMBRE_SEGUNDO'] ?></option>

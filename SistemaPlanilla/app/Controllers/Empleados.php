@@ -174,13 +174,18 @@ class Empleados extends BaseController
 			if ($this->validate([
 				'termino'   => 'required|string'
 			])) {
-				$termino = trim($this->request->getVar('termino'));
+                $termino = trim($this->request->getVar('termino'));
 				if($termino != ''){
-				$empleados_buscados = (new EmpleadosModel())
+                    $array_puestos = (new PuestosTrabajoModel())->buscar($termino);
+
+				    $empleados_buscados = (new EmpleadosModel())
                                     ->like('NOMBRE_PRIMERO', $termino)
                                     ->orLike('NOMBRE_SEGUNDO', $termino)
                                     ->orLike('APELLIDO_PATERNO', $termino)
                                     ->orLike('APELLIDO_MATERNO', $termino)
+                                    ->orLike('CORREO_ELECTRONICO_INSTITUCIONAL', $termino)
+                                    ->orLike('CORREO_ELECTRONICO_PERSONAL', $termino)
+                                    ->orWhereIn('ID_PUESTO', $array_puestos)
 									->findAll();
                 }
                 $exito = (count($empleados_buscados) == 0)? false:true;
