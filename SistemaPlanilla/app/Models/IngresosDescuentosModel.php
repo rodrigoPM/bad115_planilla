@@ -37,11 +37,11 @@ class IngresosDescuentosModel extends Model
 	}
 
 	function get_ingresos(){
-		return $this->where('TIPO', 1)->findAll();
+		return $this->where('TIPO', 1)->where('ID_CODIGO !=', 1)->findAll();
 
 	}
 	function get_descuentos(){
-		return $this->where('TIPO', 2)->findAll();
+		return $this->where('TIPO', 2)->whereNotIn('ID_CODIGO', ['2', '3', '4'])->findAll();
 	}
 	
 	function buscar($termino){ //busqueda de ids, retorno ids en formato string

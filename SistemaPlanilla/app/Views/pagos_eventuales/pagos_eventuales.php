@@ -164,7 +164,7 @@
                         <label>Planilla: </label>
                         <select required name="ID_PLANILLA" id="ID_PLANILLA" class="form-control select2 " style="width: 100%;">
                             <?php foreach ($planillas as $index => $planilla) : ?>
-                                <option value="<?= $planilla['ID_PLANILLA'] ?>"><?= $planilla['CODIGO'].' cierre: '.$planilla['FECHA_CIERRE'] ?></option>
+                                <option value="<?= $planilla['ID_PLANILLA'] ?>"><?= $planilla['CODIGO'].' Inicio:'.$planilla['DESDE_FECHA'] ?></option>
                             <?php endforeach ?>
                         </select>
                     </div>

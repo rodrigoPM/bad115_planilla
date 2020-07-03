@@ -24,4 +24,5 @@ class PagosProgramadosModel extends Model
             return [$this->find($id)];
         }
     }
+
 }
