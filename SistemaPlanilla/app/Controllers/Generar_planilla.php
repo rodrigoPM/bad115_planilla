@@ -132,7 +132,7 @@ class Generar_planilla extends BaseController
 			'ID_PLANILLA'    => $id_planilla,
 			'ID_ESTATUS'     => 2,
 			'FECHA_CIERRE'   => date('Y-m-d'),
-			// 'ID_USUARIO_CIERRE' => '',
+			'ID_USUARIO_CIERRE' => session()->get('ID_USUARIO'),
 		]);
 
 		return $this->get_planilla('cerrar');

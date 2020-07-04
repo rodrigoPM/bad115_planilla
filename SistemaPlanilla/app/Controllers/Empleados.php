@@ -25,8 +25,6 @@ class Empleados extends BaseController
     protected function data_vista($operacion = '', $exito = false, $empleados = [], $termino = ''){
         $empleados  = ($empleados == [])? (new EmpleadosModel())->get(): $empleados;
         
-        /* var_dump($empleados);
-        return; */
 
 
         $afps               = (new AfpsModel())->get();
@@ -142,7 +140,7 @@ class Empleados extends BaseController
                     'ID_EMPLEADO_JEFE'      => $this->request->getVar('ID_EMPLEADO_JEFE'),
                     'FECHA_RETIRO'          => '',
                     'HORARIO_TRABAJO'       => $this->request->getVar('HORARIO_TRABAJO'),
-                    'ID_USUARIO_CREO_EMPLEADO'         => 1,
+                    'ID_USUARIO_CREO_EMPLEADO'         => session()->get('ID_USUARIO'),
                     'FECHA_HORA_CREACION_EMPLEADO'     => date('Y-m-d H:i:s'),
                 ]);
                 $exito = true;
