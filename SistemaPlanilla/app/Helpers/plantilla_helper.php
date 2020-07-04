@@ -146,7 +146,7 @@ function crear_sidebar(
                 $submenus = $db->query(" 
 
                     SELECT MENUS.ID_MENU, MENUS.ID_MENU_PADRE, MENUS.NOMBRE_MENU, MENUS.ID_ICONO, MENUS.RUTA_MENU , ICONOS.NOMBRE_ICONO 
-                    FROM menus
+                    FROM MENUS
                     INNER JOIN ICONOS ON MENUS.ID_ICONO = ICONOS.ID_ICONO
                     INNER JOIN PERMISOS ON MENUS.ID_MENU = PERMISOS.ID_MENU
                     INNER JOIN ROLES ON PERMISOS.ID_ROL = ROLES.ID_ROL

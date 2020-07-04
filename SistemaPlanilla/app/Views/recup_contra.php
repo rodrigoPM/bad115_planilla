@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Login SISPLA</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="plugins/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Estilo -->
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body class="hold-transition login-page" id="loginbody">
+
+<div class="login-box">
+  <div class="login-logo">
+    <a href="#" class="text-white"><b>SISPLA</b> by "Sin Backup"</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <h5 class="login-box-msg">Recuperar Contraseña/Desbloquear Usuario</h5>
+
+      <form action="<?= base_url().'/login/inicio' ?>" method="post">
+        <div class="input-group mb-3">
+          <input type="email" name="CORREO" id="CORREO" class="form-control" placeholder="Correo Electrónico" value="" required="true" autofocus="true">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        <?php if(!empty(session()->getFlashData('msg_error'))) : ?>
+          <div class="col-12">
+            <div class="alert alert-danger" role="alert">
+              <?= session()->getFlashData('msg_error') ?>
+            </div>
+          </div>
+        <?php endif ?>
+        <?php if(!empty(session()->getFlashData('msg_cierre'))) : ?>
+          <div class="col-12">
+            <div class="alert alert-success" role="success">
+              <?= session()->getFlashData('msg_cierre') ?>
+            </div>
+          </div>
+        <?php endif ?>
+        <div class="row">
+          <!-- /.col -->
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Recuperar Contraseña</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="plugins/adminlte.min.js"></script>
+
+</body>
+</html>
