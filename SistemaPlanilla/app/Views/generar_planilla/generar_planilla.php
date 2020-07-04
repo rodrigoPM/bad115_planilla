@@ -96,6 +96,7 @@
                         <th>Salario Ordinario</th>
                         <th>Horas Diarias</th>
                         <th>Dias Laborados</th>
+                        <th>Salario</th>
                         <th>Seguro Social</th>
                         <th>AFP</th>
                         <th>Renta</th>
@@ -111,6 +112,7 @@
                             <td><?= $detalle['SALARIO_ORDINARIO_DETALLE']?></td>
                             <td><?= $detalle['HORAS_DIARIAS']?></td>
                             <td><?= $detalle['DIAS_LABORADOS'] ?></td>
+                            <td><?= $detalle['SALARIOS'] ?></td>
                             <td><?= $detalle['SEGURO_SOCIAL'] ?></td>
                             <td><?= $detalle['AFP'] ?></td>
                             <td><?= $detalle['RENTA'] ?></td>
@@ -126,6 +128,7 @@
                         <th>Salario Ordinario</th>
                         <th>Horas Diarias</th>
                         <th>Dias Laborados</th>
+                        <th>Salario</th>
                         <th>Seguro Social</th>
                         <th>AFP</th>
                         <th>Renta</th>

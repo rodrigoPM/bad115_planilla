@@ -94,7 +94,7 @@ class Generar_planilla extends BaseController
         
         $dompdf->render();
         
-        return $dompdf->stream("planilla".date('d-m-Y_g-i-a').".pdf");
+        return $dompdf->stream("Planilla_".$planilla_codigo.".pdf");
 	}
 
 	public function descargar_excel(){
