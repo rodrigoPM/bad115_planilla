@@ -140,7 +140,7 @@
      <strong> ______________________</strong>
      <br>
      
-     <strong>           FIRMA DEL Gerente de finanzas </strong>
+     <strong>           Firma del gerente de finanzas </strong>
     
     </center>
   
