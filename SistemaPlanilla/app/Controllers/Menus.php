@@ -14,9 +14,12 @@ class Menus extends BaseController
 	{
 		$menus  = ($menus == []) ? (new MenusModel())->get() : $menus;
 
-		$menusPadre = (new MenusModel())->get();
+		$menusPadre = (new MenusModel())
+			->where('ID_MENU_PADRE', NULL)
+			->findAll();
 
 		$iconos = (new IconosModel())->get();
+
 
 		$data = [
 			'menus'				=> $menus,
