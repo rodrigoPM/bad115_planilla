@@ -15,15 +15,13 @@ class Boleta_pago extends BaseController
     protected $nombre_clase = 'boleta';
 
     public function index()
-    {
-
-
-        
+    {   
          return crear_plantilla(view('boleta/boleta'));
     }
 
     public function view($par ='')
     {
+        var_dump('dentro de view', $par);
         $empleados=new EmpleadosModel();
   
         if ($par==''){
@@ -34,7 +32,7 @@ class Boleta_pago extends BaseController
         }else{
 
             $datos=$empleados->select("CONCAT(NOMBRE_PRIMERO,' ', NOMBRE_SEGUNDO,' ' ,APELLIDO_PATERNO,' ',APELLIDO_MATERNO) as 'nombre_c',NUMERO_DOCUMENTO,CODIGO,ID_EMPLEADO")
-            ->join('planillas', 'planillas.ID_PLANILLA =ID_PLANILLA')->where('codigo',$par)->where('id_estado','1')->get();
+            ->join('PLANILLAS', 'PLANILLAS.ID_PLANILLA =ID_PLANILLA')->where('codigo',$par)->where('id_estado','1')->get();
           
                 $data = [
                   'boletas' =>$datos,

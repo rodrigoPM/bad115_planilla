@@ -14,13 +14,10 @@
 			
 			<!-- -->
 			<section>
-				<form  id="formulario" enctype="multipart/form-data">
+				<form  id="formulario" enctype="multipart/form-data" method="get">
 					<p><img src="img/file.png" alt="" class="imagen"></p>
 					<h2>Ingrese codigo de planilla</h2>
 					<p><input type="text" name="codigo" id="codigo" onkeyup="Buscar()"  /></p>
-					
-					
-
 					
 				</form>
 
