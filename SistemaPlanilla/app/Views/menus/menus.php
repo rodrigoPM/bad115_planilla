@@ -95,11 +95,11 @@
                                     <form action="<?= $url_eliminar?>" method="post" class=" col-5">
                                     <?= csrf_field() ?>
                                     <input type="hidden" name="ID_MENU" value="<?=$menus['ID_MENU'] ?>">
-                                        <button class="btn btn-danger  btn-block">Borrar</button>
+                                        <button class="btn btn-danger  btn-block"><i class="fas fa-trash"></i></button>
                                     </form>
                                     <button class="btn btn-primary col-5 btn-sm" 
                                     onclick="editar_estado(<?= $menus['ID_MENU'] ?>, '<?= $menus['NOMBRE_MENU'] ?>')" 
-                                    data-toggle="modal" data-target="#menusModal">Editar</button>
+                                    data-toggle="modal" data-target="#menusModal"><i class="fas fa-edit"></i></button>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
