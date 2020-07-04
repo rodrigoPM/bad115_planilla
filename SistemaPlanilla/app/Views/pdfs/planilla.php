@@ -1,40 +1,105 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Planilla</title>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <center>
+    <img class="navbar-brand-full" src="img/sin_backup.png"  alt="encabezado" text-align:center>
+    </center>
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 0.875rem;
+            font-weight: normal;
+            line-height: 1.5;
+            color: #151b1e;           
+        }
+        .table {
+            display: table;
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 1rem;
+            background-color: transparent;
+            border-collapse: collapse;
+        }
+        .table-bordered {
+            border: 1px solid #c2cfd6;
+        }
+        thead {
+            display: table-header-group;
+            vertical-align: middle;
+            border-color: inherit;
+        }
+        tr {
+            display: table-row;
+            vertical-align: inherit;
+            border-color: inherit;
+        }
+        .table th, .table td {
 
-  <style>
-    .table{
-        border-collapse: collapse !important;
-        clear: both;
-        margin-top: 6px !important;
-        margin-bottom: 6px !important;
-        max-width: none !important;
-        /* border-collapse: separate !important; */
-        border-spacing: 0;
-    }
-    .p-2 {
-        padding: .5rem !important;
-    }
-    .table-secondary, .table-secondary > td, .table-secondary > th {
-        background-color: #d6d8db;
-    }
-    .table-bordered {
-        border: 1px solid #dee2e6;
-    }
-    .table-info, .table-info > td, .table-info > th {
-        background-color: #bee5eb;
-    }
-    .w-100{
-        width: 100% !important;
-    }
-  </style>
-<head>
+            text-align: center;
+            vertical-align: top;
+            border-top: 1px solid #c2cfd6;
+        }
+        .table thead th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #c2cfd6;
+        }
+        .table-bordered thead th, .table-bordered thead td {
+            border-bottom-width: 2px;
+        }
+        .table-bordered th, .table-bordered td {
+            border: 1px solid #c2cfd6;
+        }
+        th, td {
+            display: table-cell;
+            vertical-align: inherit;
+        }
+        th {
+            font-weight: bold;
+            text-align: -internal-center;
+            text-align: left;
+        }
+        tbody {
+            display: table-row-group;
+            vertical-align: middle;
+            border-color: inherit;
+        }
+        tr {
+            display: table-row;
+            vertical-align: inherit;
+            border-color: inherit;
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        #pie {
+        position: fixed;
+        width: 100%;
+        height: 100px;
+        top: auto;
+        right: 0;
+        bottom: 0px;
+        left: 0;
+
+      }
+        .izquierda{
+            float:left;
+        }
+        .derecha{
+            float:right;
+        }
+    </style>
+</head>
 <body>
-            <h2 class=""><strong>PLANILLA <?= $periodicidad?></strong>: <strong><?= $rango?></strong></h2>
+<div>
+        <h3 style="text-align: right;">Generación de Planilla. <span >Fecha:<?= date('d/m/Y') ?></span></h3>
+        <br>
+        <h2 class=""><strong>PLANILLA <?= $periodicidad?></strong>: <strong><?= $rango?></strong></h2>
+    </div>
+            
 
             <table id="" class="table table-bordered table-hover w-100 my-3 table-info" style="text-align:left">
                 <thead >
@@ -57,7 +122,7 @@
                 </tbody>
             </table>
 
-            <h5>Detalle de planilla: <strong><?= $planilla['CODIGO']?></strong></h5>
+            <h3>Detalle de planilla: <strong><?= $planilla['CODIGO']?></strong></h3>
 
             <table  class="table table-bordered table-hover mt-5 table-secondary table-responsive w-100" style="font-size: 0.8rem;">
                 <thead>
@@ -90,20 +155,6 @@
                         </tr>
                 <?php endforeach; ?>
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <th>#</th>
-                        <th>Empleado</th>
-                        <th>Contratación</th>
-                        <th>Salario Ordinario</th>
-                        <th>Horas Diarias</th>
-                        <th>Dias Laborados</th>
-                        <th>Seguro Social</th>
-                        <th>AFP</th>
-                        <th>Renta</th>
-                        <th>Salario Liquido</th>
-                    </tr>
-                </tfoot>
             </table>
         
 </body>

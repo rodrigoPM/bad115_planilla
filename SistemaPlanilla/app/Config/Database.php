@@ -29,12 +29,34 @@ class Database extends \CodeIgniter\Database\Config
 	 *
 	 * @var array
 	 */
+	/* public $default = [
+		'DSN'      => '',
+		'hostname' => 'db4free.net',
+		'username' => 'sinbackup2020',
+		'password' => 'bNsk0BzQ3V',
+		'database' => 'planilladb',
+		'DBDriver' => 'MySQLi',
+		'DBPrefix' => '',
+		'pConnect' => false,
+		'DBDebug'  => (ENVIRONMENT !== 'production'),
+		'cacheOn'  => false,
+		'cacheDir' => '',
+		'charset'  => 'utf8',
+		'DBCollat' => 'utf8mb4_0900_ai_ci',
+		'swapPre'  => '',
+		'encrypt'  => false,
+		'compress' => false,
+		'strictOn' => false,
+		'failover' => [],
+		'port'     => 3306,
+	]; */
+
 	public $default = [
 		'DSN'      => '',
-		'hostname' => 'localhost',
-		'username' => '',
-		'password' => '',
-		'database' => '',
+		'hostname' => '50.62.209.6',
+		'username' => 'BAD115',
+		'password' => '1234$',
+		'database' => 'PlanillaDB',
 		'DBDriver' => 'MySQLi',
 		'DBPrefix' => '',
 		'pConnect' => false,
