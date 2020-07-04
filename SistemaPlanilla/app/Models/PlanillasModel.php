@@ -43,7 +43,8 @@ class PlanillasModel extends Model
     }
 
     function get_id_planilla_by_codigo($codigo){
-        return ($this->select('ID_PLANILLA')->where('CODIGO', $codigo)->get())[0]['ID_PLANILLA'];
+        $planilla = $this->select('ID_PLANILLA')->where('CODIGO', $codigo)->findAll();
+        return $planilla[0]['ID_PLANILLA'];
     }
     function get_codigo_by_id($id){
         return ($this->find($id)['CODIGO']);
@@ -52,7 +53,7 @@ class PlanillasModel extends Model
     function get_codigo($periodo, $fecha){
         $planilla_codigos = $this->select('CODIGO')
                 ->where('ID_PERIOCIDAD', $periodo)
-                ->Where('DESDE_FECHA', $fecha)->get();
+                ->Where('DESDE_FECHA', $fecha)->findAll();
 
         if(count($planilla_codigos) != 1){
             return '';
@@ -66,7 +67,7 @@ class PlanillasModel extends Model
     }
 
     function get_estatus($id){
-        return ($this->find($id))['ID_ESTATUS'];
+       return ($this->find($id))['ID_ESTATUS'];
     }
 
 }

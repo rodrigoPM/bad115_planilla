@@ -9,9 +9,9 @@ class EmpleadosModel extends Model
 
     protected $returnType     = 'array';
 
-    protected $allowedFields = ['ID_SUB_SECCION', 'ID_ESTADO', 'ID_ESTADO_CIVIL', 
-                                'ID_AFP', 'ID_PUESTO', 'ID_GENERO','ID_TIPO_CONTRATACION',
-                                'ID_MUNICIPIO', 'ID_PROFESION_OFICIO',
+    protected $allowedFields = ['ID_PUESTO', 'ID_PROFESION_OFICIO', 'ID_ESTADO_CIVIL', 
+                                'ID_GENERO', 'ID_SUB_SECCION', 'ID_TIPO_CONTRATACION','ID_AFP',
+                                'ID_ESTADO', 'ID_MUNICIPIO',
                                 'CODIGO_EMPLEADO', 'NOMBRE_PRIMERO', 'NOMBRE_SEGUNDO',
                                 'APELLIDO_PATERNO', 'APELLIDO_MATERNO', 'FECHA_NACIMIENTO',
                                 'NUMERO_DOCUMENTO', 'FECHA_EXPEDICION', 

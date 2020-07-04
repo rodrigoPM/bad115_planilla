@@ -22,12 +22,14 @@ class Generar_planilla extends BaseController
 
 	protected function data_vista($operacion = '', $exito = false, $parametros = [], $termino = '')
 	{
+		
 		$planilla  = ($parametros == []) ? '' : $parametros['planilla'];
 		$estatus  = ($parametros == []) ? '' : $parametros['estatus'];
 		$detalles_planillas  = ($parametros == []) ? '' : $parametros['detalles'];
 
 		$periodo_nombre = (new PeriodicidadPlanillaModel())->get_descripcion((new EmpresaModel)->get_periodicidad(1));
 		$rango = $this->get_rango();
+		
 
 		$data = [
 			'contratacionModel' =>new TiposContratacionModel(),
@@ -139,9 +141,8 @@ class Generar_planilla extends BaseController
 	protected function get_planilla($op = ''){
 		$planilla_codigo = $this->codigo_planilla();
 		$exito = false;
+
 		
-		// var_dump($planilla_codigo);
-		// return;
 		if($planilla_codigo != ''){ //la planilla ya existe
 			$this->calcular_planilla(true);
 			$operacion = $op;
@@ -171,9 +172,10 @@ class Generar_planilla extends BaseController
 		if((new EmpresaModel)->get_periodicidad(1) == 2){//quincenal
 			$inicio = (date('d') < 16) ? 01: 16;
 		}
+
 		$fecha_inicio = date('Y-m-').strval($inicio);//fecha de inicio: las mensuales en 01 y las quincenales en 01 o 16
 		$planilla_codigo = (new PlanillasModel())->get_codigo((new EmpresaModel)->get_periodicidad(1),$fecha_inicio);
-		
+
 		return $planilla_codigo;
 	}
 
@@ -193,6 +195,7 @@ class Generar_planilla extends BaseController
 		}
 		
 		$planilla_codigo = $this->codigo_planilla();
+
 	
 		if($planilla_codigo == ''){
 			$exito = true;

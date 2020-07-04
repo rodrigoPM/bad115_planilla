@@ -10,8 +10,7 @@ class DetallesPlanillasModel extends Model
 
     protected $allowedFields 	= ['ID_EMPLEADO', 'ID_PLANILLA', 'ID_TIPO_CONTRATACION_DETALLE', 
                                     'SALARIO_ORDINARIO_DETALLE','DIAS_VACACIONES', 'DIAS_SIN_SUELDO',
-                                    'HORAS_DIARIAS', 'DIAS_LABORADOS', 'DIAS_SIN_SUELDO',
-                                    'HORAS_DIARIAS ', 'DIAS_LABORADOS', 'ID_SUB_SECCION_DETALLE',
+                                    'HORAS_DIARIAS', 'DIAS_LABORADOS', 'ID_SUB_SECCION_DETALLE',
                                     'SALARIOS', 'HORAS_EXTRA', 'VACACIONES',
                                     'COMISIONES', 'BONIFICACIONES', 'OTROS_INGRESOS',
                                     'SEGURO_SOCIAL','AFP','RENTA',

@@ -106,18 +106,19 @@ function crear_excel($cod_planilla, $p_rango){
     $hoja->setCellValueByColumnAndRow(5, 8, "Dias Sin Sueldo");
     $hoja->setCellValueByColumnAndRow(6, 8, "Horas diarias");
     $hoja->setCellValueByColumnAndRow(7, 8, "Días Laborados");
-    $hoja->setCellValueByColumnAndRow(8, 8, "Horas Extras");
-    $hoja->setCellValueByColumnAndRow(9, 8, "Vacaciones");
-    $hoja->setCellValueByColumnAndRow(10, 8, "Comisiones");
-    $hoja->setCellValueByColumnAndRow(11, 8, "Bonificaciones");
-    $hoja->setCellValueByColumnAndRow(12, 8, "Otros Ingresos");
-    $hoja->setCellValueByColumnAndRow(13, 8, "Seguro Social");
-    $hoja->setCellValueByColumnAndRow(14, 8, "AFP");
-    $hoja->setCellValueByColumnAndRow(15, 8, "Renta");
-    $hoja->setCellValueByColumnAndRow(16, 8, "Prestamo Banco");
-    $hoja->setCellValueByColumnAndRow(17, 8, "Fondo Social Vivienda");
-    $hoja->setCellValueByColumnAndRow(18, 8, "Otros Descuentos");
-    $hoja->setCellValueByColumnAndRow(19, 8, "Salario Liquido");
+    $hoja->setCellValueByColumnAndRow(8, 8, "Salarios");
+    $hoja->setCellValueByColumnAndRow(9, 8, "Horas Extras");
+    $hoja->setCellValueByColumnAndRow(10, 8, "Vacaciones");
+    $hoja->setCellValueByColumnAndRow(11, 8, "Comisiones");
+    $hoja->setCellValueByColumnAndRow(12, 8, "Bonificaciones");
+    $hoja->setCellValueByColumnAndRow(13, 8, "Otros Ingresos");
+    $hoja->setCellValueByColumnAndRow(14, 8, "Seguro Social");
+    $hoja->setCellValueByColumnAndRow(15, 8, "AFP");
+    $hoja->setCellValueByColumnAndRow(16, 8, "Renta");
+    $hoja->setCellValueByColumnAndRow(17, 8, "Prestamo Banco");
+    $hoja->setCellValueByColumnAndRow(18, 8, "Fondo Social Vivienda");
+    $hoja->setCellValueByColumnAndRow(19, 8, "Otros Descuentos");
+    $hoja->setCellValueByColumnAndRow(20, 8, "Salario Liquido");
 
 
     //imprimiendo el registro de planilla
@@ -129,23 +130,24 @@ function crear_excel($cod_planilla, $p_rango){
         $hoja->setCellValueByColumnAndRow(5,$i + 9, $detalles_planillas[$i]['DIAS_SIN_SUELDO']);
         $hoja->setCellValueByColumnAndRow(6,$i + 9, $detalles_planillas[$i]['HORAS_DIARIAS']);
         $hoja->setCellValueByColumnAndRow(7,$i + 9, $detalles_planillas[$i]['DIAS_LABORADOS']);
-        $hoja->setCellValueByColumnAndRow(8,$i + 9, $detalles_planillas[$i]['HORAS_EXTRA']);
-        $hoja->setCellValueByColumnAndRow(9,$i + 9, $detalles_planillas[$i]['VACACIONES']);
-        $hoja->setCellValueByColumnAndRow(10,$i + 9, $detalles_planillas[$i]['COMISIONES']);
-        $hoja->setCellValueByColumnAndRow(11,$i + 9, $detalles_planillas[$i]['BONIFICACIONES']);
-        $hoja->setCellValueByColumnAndRow(12,$i + 9, $detalles_planillas[$i]['OTROS_INGRESOS']);
-        $hoja->setCellValueByColumnAndRow(13,$i + 9, $detalles_planillas[$i]['SEGURO_SOCIAL']);
-        $hoja->setCellValueByColumnAndRow(14,$i + 9, $detalles_planillas[$i]['AFP']);
-        $hoja->setCellValueByColumnAndRow(15,$i + 9, $detalles_planillas[$i]['RENTA']);
-        $hoja->setCellValueByColumnAndRow(16,$i + 9, $detalles_planillas[$i]['PRESTAMOS_BANCO']);
-        $hoja->setCellValueByColumnAndRow(17,$i + 9, $detalles_planillas[$i]['FONDO_SOCIAL_VIVIENDA']);
-        $hoja->setCellValueByColumnAndRow(18,$i + 9, $detalles_planillas[$i]['OTROS_DESCUENTOS']);
-        $hoja->setCellValueByColumnAndRow(19,$i + 9, $detalles_planillas[$i]['SALARIO_LIQUIDO_DETALLE']);
+        $hoja->setCellValueByColumnAndRow(8,$i + 9, $detalles_planillas[$i]['SALARIOS']);
+        $hoja->setCellValueByColumnAndRow(9,$i + 9, $detalles_planillas[$i]['HORAS_EXTRA']);
+        $hoja->setCellValueByColumnAndRow(10,$i + 9, $detalles_planillas[$i]['VACACIONES']);
+        $hoja->setCellValueByColumnAndRow(11,$i + 9, $detalles_planillas[$i]['COMISIONES']);
+        $hoja->setCellValueByColumnAndRow(12,$i + 9, $detalles_planillas[$i]['BONIFICACIONES']);
+        $hoja->setCellValueByColumnAndRow(13,$i + 9, $detalles_planillas[$i]['OTROS_INGRESOS']);
+        $hoja->setCellValueByColumnAndRow(14,$i + 9, $detalles_planillas[$i]['SEGURO_SOCIAL']);
+        $hoja->setCellValueByColumnAndRow(15,$i + 9, $detalles_planillas[$i]['AFP']);
+        $hoja->setCellValueByColumnAndRow(16,$i + 9, $detalles_planillas[$i]['RENTA']);
+        $hoja->setCellValueByColumnAndRow(17,$i + 9, $detalles_planillas[$i]['PRESTAMOS_BANCO']);
+        $hoja->setCellValueByColumnAndRow(18,$i + 9, $detalles_planillas[$i]['FONDO_SOCIAL_VIVIENDA']);
+        $hoja->setCellValueByColumnAndRow(19,$i + 9, $detalles_planillas[$i]['OTROS_DESCUENTOS']);
+        $hoja->setCellValueByColumnAndRow(20,$i + 9, $detalles_planillas[$i]['SALARIO_LIQUIDO_DETALLE']);
     }
     
     
     $hoja = iterar_celdas('A', 'D', 3, 4, $hoja, $styleArray);
-    $hoja = iterar_celdas('A', 'S', 8, 8 + count($detalles_planillas), $hoja, $styleArray);
+    $hoja = iterar_celdas('A', 'T', 8, 8 + count($detalles_planillas), $hoja, $styleArray);
 
     //iterando el excel para dar auto width
     foreach(range('A','Z') as $columnID) {
