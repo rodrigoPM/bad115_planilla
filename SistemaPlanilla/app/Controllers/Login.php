@@ -117,4 +117,9 @@ class Login extends BaseController
         return redirect()->to(base_url() . '/login');
     }
 
+    public function recuperar()
+    {
+        return redirect()->to(base_url() . '/recuperar_contrasenia');
+    }
+
 }

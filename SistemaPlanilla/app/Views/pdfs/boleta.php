@@ -99,7 +99,8 @@
 </head>
 <body>
     <div>
-        <h3>Boleta de pago. <span >Fecha:<?= date('d/m/Y') ?></span></h3>
+        <h3>Boleta de pago.</h3>
+        <h3><span style=" float:right;">Fecha:<?= date('d/m/Y') ?></span></h3>
         <br>
         <h3>Datos del empleado</h3>
     </div>
@@ -112,6 +113,7 @@
       <th>Direccion</th>
       <th>Telefono</th>
       <th>Numero de documento</th>
+      <th>Dias laborados</th>
       <th>Salario base</th>
       <th>Salario liquido</th>
    
@@ -126,7 +128,8 @@
       <td ><?= $boleta['direccion'] ?></td>
       <td ><?= $boleta['telefonos'] ?></td>
       <td ><?= $boleta['NUMERO_DOCUMENTO'] ?></td>
-      <td ><?= $boleta['MONTO'] ?></td>
+     <td><?= $dias->dias($boleta['ID_EMPLEADO'])[0]['DIAS_LABORADOS'] ?>  </td>
+      <td ><?= $boleta['SALARIO'] ?></td>
       <td ><?= $boleta['liquido'] ?></td>
           </tr>
     <?php endforeach; ?> 
@@ -134,8 +137,6 @@
        
   </tbody>
 </table>
-
-<br>
 
 <h3>Informacion acerca de los descuentos y los ingresos</h3>
 
@@ -173,12 +174,17 @@
        </tbody>
      </table>
 
+     <center>
 
      <br> 
      <strong> ______________________</strong>
      <br>
      
      <strong>           FIRMA DEL EMPLEADO </strong>
+    
+    </center>
+  
+    
     
                    
     </div>
@@ -287,8 +293,7 @@
 </head>
 <body>
     <div>
-        <h3>Boleta de pago. </h3>
-        <br>
+        <h3>Boleta de pago.</h3>
         <h3><span style=" float:right;">Fecha:<?= date('d/m/Y') ?></span></h3>
         <br>
         <h3>Datos del empleado</h3>
@@ -302,6 +307,7 @@
       <th>Direccion</th>
       <th>Telefono</th>
       <th>Numero de documento</th>
+      <th>Dias laborados</th>
       <th>Salario base</th>
       <th>Salario liquido</th>
    
@@ -316,7 +322,8 @@
       <td ><?= $boleta['direccion'] ?></td>
       <td ><?= $boleta['telefonos'] ?></td>
       <td ><?= $boleta['NUMERO_DOCUMENTO'] ?></td>
-      <td ><?= $boleta['MONTO'] ?></td>
+     <td><?= $dias->dias($boleta['ID_EMPLEADO'])[0]['DIAS_LABORADOS'] ?>  </td>
+      <td ><?= $boleta['SALARIO'] ?></td>
       <td ><?= $boleta['liquido'] ?></td>
           </tr>
     <?php endforeach; ?> 
@@ -324,8 +331,6 @@
        
   </tbody>
 </table>
-
-<br>
 
 <h3>Informacion acerca de los descuentos y los ingresos</h3>
 
@@ -363,6 +368,7 @@
        </tbody>
      </table>
 
+     <center>
 
      <br> 
      <strong> ______________________</strong>
@@ -370,23 +376,15 @@
      
      <strong>           FIRMA DEL EMPLEADO </strong>
     
+    </center>
+  
+    
+    
                    
     </div>
     <div id="pie"><img   src="img/sin_backup.png"  alt="encabezado" text-align:center></div>   
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
 </div>
 
 

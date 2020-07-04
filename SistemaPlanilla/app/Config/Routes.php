@@ -40,7 +40,7 @@ $routes->match(['get', 'post'], 'empresa', 'Empresa::index', ['filter' => 'check
 $routes->match(['get', 'post'], 'departamentos_empresa', 'Departamentos_empresa::index', ['filter' => 'checkRole']);
 $routes->match(['get', 'post'], 'area', 'Area::index', ['filter' => 'checkRole']);
 $routes->match(['get', 'post'], 'secciones', 'Secciones::index', ['filter' => 'checkRole']);
-$routes->match(['get', 'post'], 'subsecciones', 'Subsecciones::index', ['filter' => 'checkRole']);
+$routes->match(['get', 'post'], 'subsecciones', 'SubSecciones::index', ['filter' => 'checkRole']);
 $routes->match(['get', 'post'], 'unidades', 'Unidades::index', ['filter' => 'checkRole']);
 $routes->match(['get', 'post'], 'puestos_trabajo', 'Puestos_Trabajo::index', ['filter' => 'checkRole']);
 

@@ -34,4 +34,9 @@ class DetallesPlanillasModel extends Model
     function get_destalles($id_planilla){
         return $this->where('ID_PLANILLA', $id_planilla)->findAll();
     }
+    function dias($id_empleado)
+    {
+
+        return $this->select('DIAS_LABORADOS')->where('ID_EMPLEADO',$id_empleado)->get();
+    }
 }
