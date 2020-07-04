@@ -18,10 +18,10 @@ class CheckRole implements FilterInterface
             $record_num = $request->uri->getSegment($last);
             $rol = session()->get('ID_ROL');
 
-            $query = $db->query("SELECT MENUS.RUTA_MENU FROM menus
-                INNER JOIN permisos ON permisos.ID_MENU = MENUS.ID_MENU
-                INNER JOIN roles ON roles.ID_ROL = permisos.ID_ROL
-                WHERE menus.RUTA_MENU = ". $db->escape($record_num) ." 
+            $query = $db->query("SELECT MENUS.RUTA_MENU FROM MENUS
+                INNER JOIN PERMISOS ON PERMISOS.ID_MENU = MENUS.ID_MENU
+                INNER JOIN ROLES ON ROLES.ID_ROL = PERMISOS.ID_ROL
+                WHERE MENUS.RUTA_MENU = ". $db->escape($record_num) ." 
                 AND ROLES.ID_ROL = ". $db->escape($rol) ."
             ");
 

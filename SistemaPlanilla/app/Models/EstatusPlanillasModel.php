@@ -28,6 +28,8 @@ class EstatusPlanillasModel extends Model
     }
 
     function get_nombre($id){
-        return ($this->find($id))['NOMBRE_ESTATUS'];
+        
+        $estatus = $this->find($id);
+        return $estatus['NOMBRE_ESTATUS'];
     }
 }

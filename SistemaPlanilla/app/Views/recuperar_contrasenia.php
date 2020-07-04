@@ -29,7 +29,7 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <h5 class="login-box-msg">Inicio de Sesión</h5>
+      <h5 class="login-box-msg">Recuperar Contraseña</h5>
 
       <form action="<?= base_url().'/login/inicio' ?>" method="post">
         <div class="input-group mb-3">
@@ -41,10 +41,10 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" name="CONTRASENIA" id="CONTRASENIA" class="form-control" placeholder="Contraseña" required="true">
+          <input type="email" name="CORREO_USUARIO" id="CORREO_USUARIO" class="form-control" placeholder="Correo Electrónico" value="" required="true" autofocus="true">
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-lock"></span>
+              <span class="fas fa-envelope"></span>
             </div>
           </div>
         </div>
@@ -65,14 +65,14 @@
         <div class="row">
           <!-- /.col -->
           <div class="col-12">
-            <button type="submit" class="btn btn-primary btn-block btn-flat">Log in</button>
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Recuperar Contraseña</button>
           </div>
           <!-- /.col -->
         </div>
       </form>
       <hr>
       <p class="mb-1 text-center">
-        Olvidé mi <a href="<?= base_url().'/recuperar_contrasenia'?>">contraseña</a>
+        <a href="<?= base_url().'/login'?>">Iniciar sesión</a>
       </p>
     </div>
     <!-- /.login-card-body -->

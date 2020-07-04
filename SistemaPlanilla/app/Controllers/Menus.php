@@ -14,9 +14,12 @@ class Menus extends BaseController
 	{
 		$menus  = ($menus == []) ? (new MenusModel())->get() : $menus;
 
-		$menusPadre = (new MenusModel())->get();
+		$menusPadre = (new MenusModel())
+			->where('ID_MENU_PADRE', NULL)
+			->findAll();
 
 		$iconos = (new IconosModel())->get();
+
 
 		$data = [
 			'menus'				=> $menus,
@@ -95,14 +98,14 @@ class Menus extends BaseController
 	{
 		if ($this->request->getMethod() == 'post') {
 			$exito = false;
-			$tipos_movimiento_buscados = [];
+			$menus_buscados = [];
 			$termino = '';
 			if ($this->validate([
 				'termino'   => 'required|string'
 			])) {
 				$termino = trim($this->request->getVar('termino'));
 				if ($termino != '') {
-					$tipos_movimiento_buscados = (new MenusModel())
+					$menus_buscados = (new MenusModel())
 						->like('NOMBRE_MENU', $termino)
 						->findAll();
 				}

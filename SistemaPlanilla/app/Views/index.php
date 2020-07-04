@@ -1,68 +1,22 @@
-    <div class="row">
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-info">
-          <div class="inner">
-            <h3>Empresa</h3>
-
-            <p>Administración</p>
-          </div>
-          <div class="icon">
-            <i class="far fa-building"></i>
-          </div>
-          <a href="#" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-      </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-success">
-          <div class="inner">
-            <h3>Planilla</h3>
-
-            <p>Pago de salarios</p>
-          </div>
-          <div class="icon">
-            <i class="far fa-copy"></i>
-
-          </div>
-          <a href="#" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-      </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-warning">
-          <div class="inner">
-            <h3>Empleados</h3>
-
-            <p>Recurso Humano</p>
-          </div>
-          <div class="icon">
-            <i class="fas fa-address-card"></i>
-          </div>
-          <a href="#" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-      </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-danger">
-          <div class="inner">
-            <h3>Usuarios</h3>
-
-            <p>Usuarios del sistema</p>
-          </div>
-          <div class="icon">
-            <i class="fas fa-users-cog"></i>
-          </div>
-          <a href="<?= base_url() ?>/usuarios" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-      </div>
-      <!-- ./col -->
-
-    </div>
-
+<div class="jumbotron jumbotron-fluid">
+  <div class="container text-center">
+    <h1 class="display-3 text-center">BIENVENIDO</h1>
+    <p>al</p>
+    <h2 class="text-center">
+    SISTEMA DE PLANILLAS
+    </h2>
+    <p>por</p>
+    <h3>SIN BACKUP</h3>
+    <!-- <p>por</p>
+    <ul>
+    <li>Argueta Medina, Cristian Edilson : <strong>AM15005</strong></li>
+    <li>Flores Escobar, Moisés Nelson : <strong>FE11002 </strong></li>
+    <li>López Lara, Santiago Ernesto : <strong>LL02018</strong></li>
+    <li>Presa Mariona, José Rodrigo : <strong>PM15007</strong></li>
+    <li>Ramos López, Joel Armando : <strong>RL08017</strong></li>
+    </ul> -->
+  </div>
+</div>
 
 
 
