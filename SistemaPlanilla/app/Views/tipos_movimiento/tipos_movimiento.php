@@ -84,9 +84,8 @@
                                     <form action="<?= $url_eliminar?>" method="post" class=" col-5">
                                     <?= csrf_field() ?>
                                     <input type="hidden" name="ID_TIPO_MOVIMIENTO" value="<?=$tipos_movimiento['ID_TIPO_MOVIMIENTO'] ?>">
-                                        <button class="btn btn-danger  btn-block" onclick="return confirm('Desea eliminar el registro')">Eliminar</button>
+                                        <button class="btn btn-danger btn-block">Eliminar</button>
                                     </form>
-                                    <button class="btn btn-danger" id="delete" onclick="borrar(<?= $tipos_movimiento['ID_TIPO_MOVIMIENTO'] ?>, '<?= $tipos_movimiento['NOMBRE_TIPO_MOVIMIENTO'] ?>', '<?= $url_eliminar ?>')" >Borrar</button>
                                     <button class="btn btn-primary col-5 btn-sm" 
                                     onclick="editar_estado(<?= $tipos_movimiento['ID_TIPO_MOVIMIENTO'] ?>, '<?= $tipos_movimiento['NOMBRE_TIPO_MOVIMIENTO'] ?>')" 
                                     data-toggle="modal" data-target="#tipoMovModal">Editar</button>

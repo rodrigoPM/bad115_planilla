@@ -70,10 +70,9 @@
           <!-- /.col -->
         </div>
       </form>
-
-
-      <p class="mb-1">
-        <a href="#">Olvidé mi contraseña</a>
+      <hr>
+      <p class="mb-1 text-center">
+        Olvidé mi <a href="<?= base_url().'/recuperar_contrasenia'?>">contraseña</a>
       </p>
     </div>
     <!-- /.login-card-body -->

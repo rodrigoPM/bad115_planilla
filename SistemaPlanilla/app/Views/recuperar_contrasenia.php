@@ -29,14 +29,22 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <h5 class="login-box-msg">Recuperar Contraseña/Desbloquear Usuario</h5>
+      <h5 class="login-box-msg">Recuperar Contraseña</h5>
 
       <form action="<?= base_url().'/login/inicio' ?>" method="post">
         <div class="input-group mb-3">
-          <input type="email" name="CORREO" id="CORREO" class="form-control" placeholder="Correo Electrónico" value="" required="true" autofocus="true">
+          <input type="text" name="USUARIO" id="USUARIO" class="form-control" placeholder="Usuario" value="" required="true" autofocus="true">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="email" name="CORREO_USUARIO" id="CORREO_USUARIO" class="form-control" placeholder="Correo Electrónico" value="" required="true" autofocus="true">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
             </div>
           </div>
         </div>
@@ -62,6 +70,10 @@
           <!-- /.col -->
         </div>
       </form>
+      <hr>
+      <p class="mb-1 text-center">
+        <a href="<?= base_url().'/login'?>">Iniciar sesión</a>
+      </p>
     </div>
     <!-- /.login-card-body -->
   </div>
