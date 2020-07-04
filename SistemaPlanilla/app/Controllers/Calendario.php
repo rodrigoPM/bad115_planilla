@@ -17,7 +17,8 @@ class Calendario extends BaseController
                 'id'     => $evento['ID_EVENTO'],
                 'title'  => $evento['TITULO'],
                 'start'  => $evento['FECHA_INICIO'],
-                'end'    => $evento['FECHA_FIN']
+                'end'    => $evento['FECHA_FIN'],
+                'allDay' => true,
             ];
         }
 

@@ -44,24 +44,21 @@
             <div class="row mb-3">
                 <div class="col-4">
                 <?php if ($estatus != 'CERRADA') : ?>
-                    <form action="<?= $url_cerrar ?>" method="post">
-                        <?= csrf_field() ?>
-                        <button type="submit" class="btn  btn-warning btn-block" data-toggle="modal" data-target="#domicilioModel" onclick="">
+                        <button type="button" class="btn  btn-warning btn-block" data-toggle="modal" data-target="#cerrarModel" onclick="">
                         <strong>Cerrar Planilla</strong></button>
-                    </form>
                 <?php endif ?>
                 </div>
                 <div class="col-4">
                 <form action="<?= $url_descargar_excel ?>" method="post">
                         <?= csrf_field() ?>
-                        <button type="submit" class="btn  btn-primary btn-block" data-toggle="modal" data-target="#domicilioModel" onclick="">
+                        <button type="submit" class="btn  btn-primary btn-block"  onclick="">
                         <strong>Descargar Planilla: Excel</strong></button>
                     </form>
                 </div>
                 <div class="col-4">
                 <form action="<?= $url_descargar_pdf ?>" method="post">
                         <?= csrf_field() ?>
-                        <button type="submit" class="btn  btn-primary btn-block" data-toggle="modal" data-target="#domicilioModel" onclick="">
+                        <button type="submit" class="btn  btn-primary btn-block"  onclick="">
                         <strong>Descargar Planilla: PDF</strong></button>
                     </form>
                 </div>
@@ -152,9 +149,32 @@
     </form>
 <?php endif ?>
 
-
 <hr>
 
+
+<!-- Modal Eliminar -->
+<div class="modal" id="cerrarModel" tabindex="-1" role="dialog" aria-labelledby="cerrarModelLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content  bg-warning">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cerrarModelLabel">Cerrar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <h4>¿Esta seguro que desea cerrar esta PLANILLA?</h4>
+      <form action="<?= $url_cerrar ?>" method="post" class="mt-4 row d-flex justify-content-around">
+            <?= csrf_field() ?>
+            <button type="button" class="btn btn-outline-light col-4" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-outline-light col-4" >
+            Cerrar Planilla
+            </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
