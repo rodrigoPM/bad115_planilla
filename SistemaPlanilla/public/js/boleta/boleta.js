@@ -1,6 +1,4 @@
 function Buscar() {
-console.log('lola');
-
 
     var par = document.getElementById("codigo").value;
     

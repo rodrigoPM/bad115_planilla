@@ -22,7 +22,6 @@ class Boleta_pago extends BaseController
 
     public function view($par ='')
     {
-       
         $empleados=new EmpleadosModel();
        
   
