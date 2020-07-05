@@ -22,7 +22,7 @@ class Boleta_pago extends BaseController
 
     public function view($par ='')
     {
-        var_dump('dentro de view', $par);
+       
         $empleados=new EmpleadosModel();
        
   
@@ -33,8 +33,8 @@ class Boleta_pago extends BaseController
 
         }else{
 
-            $datos=$empleados->select("CONCAT(NOMBRE_PRIMERO,' ', NOMBRE_SEGUNDO,' ' ,APELLIDO_PATERNO,' ',APELLIDO_MATERNO) as 'nombre_c',NUMERO_DOCUMENTO,CODIGO,ID_EMPLEADO")
-            ->join('planillas', 'planillas.ID_PLANILLA =ID_PLANILLA')->where('codigo',$par)->where('id_estado','1')->get();
+            $datos=$empleados->select("CONCAT(NOMBRE_PRIMERO,' ', NOMBRE_SEGUNDO,' ' ,APELLIDO_PATERNO,' ',APELLIDO_MATERNO) as 'NOMBRE_C',NUMERO_DOCUMENTO,CODIGO,ID_EMPLEADO")
+            ->join('PLANILLAS', 'PLANILLAS.ID_PLANILLA =ID_PLANILLA')->where('CODIGO',$par)->where('ID_ESTADO','1')->get();
 
                 $data = [
                   'boletas' =>$datos,
@@ -59,8 +59,8 @@ class Boleta_pago extends BaseController
         $boleta = new VistaBoletaModel();
      
 
-        $datos= $boleta->select("*")->where('ID_EMPLEADO',$id)->where('codigo',$codigo)->where('NOMBRE_CONCEPTO','SALARIO ORDINARIO')->get();
-        $detalles= $boleta->select("NOMBRE_CONCEPTO,TIPO,MONTO")->where('ID_EMPLEADO',$id)->where('codigo',$codigo)->where('NOMBRE_CONCEPTO <>','SALARIO ORDINARIO')->get();
+        $datos= $boleta->select("*")->where('ID_EMPLEADO',$id)->where('CODIGO',$codigo)->where('NOMBRE_CONCEPTO','SALARIO ORDINARIO')->get();
+        $detalles= $boleta->select("NOMBRE_CONCEPTO,TIPO,MONTO")->where('ID_EMPLEADO',$id)->where('CODIGO',$codigo)->where('NOMBRE_CONCEPTO <>','SALARIO ORDINARIO')->get();
 
         $data = [
             'boletas' =>$datos,
@@ -84,21 +84,5 @@ class Boleta_pago extends BaseController
 
     }
 
-
-    //--------------------------------------------------------------------
-    public function nuevo()
-    {
-        (new UnidadesModel())->save([
-            'ID_UNIDAD' => strtoupper($this->request->getVar('ID_UNIDAD')),
-            'NOMBRE_UNIDAD' =>strtoupper( $this->request->getVar('NOMBRE_UNIDAD'))
-        ]);
-        $unidades = new UnidadesModel();
-        $data = [
-           'unidades' => $unidades->get()
-       ];
-   
-       
-      return view('empresa/unidades/busqueda', $data);
-    }
 
 }

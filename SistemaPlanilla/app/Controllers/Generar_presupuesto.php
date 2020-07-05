@@ -25,31 +25,6 @@ class Generar_presupuesto extends BaseController
          return crear_plantilla(view('generar_presupuesto/pruesupuesto'));
     }
 
-    public function view($par ='')
-    {
-        $empleados=new EmpleadosModel();
-       
-  
-        if ($par==''){
-
-            return view('boleta/resultado_import');
-
-
-        }else{
-
-            $datos=$empleados->select("CONCAT(NOMBRE_PRIMERO,' ', NOMBRE_SEGUNDO,' ' ,APELLIDO_PATERNO,' ',APELLIDO_MATERNO) as 'nombre_c',NUMERO_DOCUMENTO,CODIGO,ID_EMPLEADO")
-            ->join('planillas', 'planillas.ID_PLANILLA =ID_PLANILLA')->where('codigo',$par)->where('id_estado','1')->get();
-            
-          
-                $data = [
-                  'boletas' =>$datos,
-                  'paginador'=>$empleados->pager
-              ];
-                  return view('boleta/tabla_boleta',$data);
-        }
-
-
-    }
     public function imprimir($hasta ='')
     {
 
