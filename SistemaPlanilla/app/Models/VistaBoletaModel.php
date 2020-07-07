@@ -4,7 +4,7 @@ use CodeIgniter\Model;
 
 class VistaBoletaModel extends Model
 {
-    protected $table      = 'VISTA_BOLETA';
+    protected $table      = 'vista_boleta';
     protected $primaryKey = 'ID_MOV_BOLETA';
 
     protected $returnType     = 'array';
