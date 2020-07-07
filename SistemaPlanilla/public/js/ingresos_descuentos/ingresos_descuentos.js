@@ -1,6 +1,6 @@
 function editar_estado(
     ID_CODIGO,
-    ID_TIPO_MOVIMIENTO,
+    ID_TIPO_MOVIMIENTO = 0,
     NOMBRE_CONCEPTO,
     APLICA_SEGURO,
     APLICA_AFP,
@@ -9,8 +9,23 @@ function editar_estado(
     PREFIJO,
     ){
         limpiar_validaciones();
+        $('#ID_CODIGO').val(ID_CODIGO);
+        $('#ID_CODIGO').trigger('change');
         $('#ID_TIPO_MOVIMIENTO').val(ID_TIPO_MOVIMIENTO);
         $('#ID_TIPO_MOVIMIENTO').trigger('change');
+        $('#NOMBRE_CONCEPTO').val(NOMBRE_CONCEPTO);
+        $('#NOMBRE_CONCEPTO').trigger('change');
+        $('#APLICA_SEGURO').val(APLICA_SEGURO);
+        $('#APLICA_SEGURO').trigger('change');
+        $('#APLICA_AFP').val(APLICA_AFP);
+        $('#APLICA_AFP').trigger('change');
+        $('#APLICA_RENTA').val(APLICA_RENTA);
+        $('#APLICA_RENTA').trigger('change');
+        $('#TIPO').val(TIPO);
+        $('#TIPO').trigger('change');
+        $('#PREFIJO').val(PREFIJO);
+        $('#PREFIJO').trigger('change');
+
     
         document.querySelector('#ID_CODIGO').value = ID_CODIGO; 
         document.querySelector('#NOMBRE_CONCEPTO').value = NOMBRE_CONCEPTO;
