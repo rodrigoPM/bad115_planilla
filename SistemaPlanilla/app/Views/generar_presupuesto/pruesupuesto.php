@@ -36,6 +36,7 @@
 $(document).on("click","#presupuesto_fecha",function(){ 
     //codigo
    //codigo para imprimir
+   //mandar a imprimir presupuesto
    
     var hasta  =  $('#hasta').val();
 
