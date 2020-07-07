@@ -59,7 +59,7 @@ class Boleta_pago extends BaseController
      
 
         $datos= $boleta->select("*")->where('ID_EMPLEADO',$id)->where('CODIGO',$codigo)->where('NOMBRE_CONCEPTO','SALARIO ORDINARIO')->get();
-        $detalles= $boleta->select("NOMBRE_CONCEPTO,TIPO,MONTO")->where('ID_EMPLEADO',$id)->where('CODIGO',$codigo)->where('NOMBRE_CONCEPTO <>','SALARIO ORDINARIO')->get();
+        $detalles= $boleta->select("NOMBRE_CONCEPTO,TIPO,MONTO")->where('ID_EMPLEADO',$id)->where('CODIGO',$codigo)->orderBy('TIPO', 'ASC')->get();
 
         $data = [
             'boletas' =>$datos,
@@ -72,7 +72,7 @@ class Boleta_pago extends BaseController
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
 		$dompdf = new Dompdf($pdfOptions);
-		$dompdf->set_paper('letter', 'landscape');
+		$dompdf->set_paper('letter', 'portrait');
         $html = view('pdfs/boleta', $data);
 
         $dompdf->loadHtml($html);
