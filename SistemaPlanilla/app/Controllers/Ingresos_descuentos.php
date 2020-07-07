@@ -92,25 +92,25 @@ class Ingresos_descuentos extends BaseController
         if($this->request->getMethod() == 'post')
         {
             $exito = false;
-            $usuarios_buscados = [];
+            $ingresos_descuenntos_buscados = [];
             $termino = '';
             if($this->validate([
                 'termino'   => 'required|string'
             ])) {
                 $termino = trim($this->request->getVar('termino'));
                 if($termino != ''){
-                    $usuarios_buscados = (new UsuariosModel())
-                                            ->like('USUARIO', $termino)
-                                            ->orLike('NOMBRES', $termino)
-                                            ->orLike('APELLIDOS', $termino)
-                                            ->orLike('ACTIVO', $termino)
+                    $ingresos_descuentos_buscados = (new IngresosDescuentosModel())
+                                            ->like('ID_TIPO_MOVIMIENTO', $termino)
+                                            ->orLike('NOMBRE_CONCEPTO', $termino)
+                                            ->orLike('APLICA_SEGURO', $termino)
+                                            ->orLike('PREFIJO', $termino)
                                             ->findAll();
                 }
-                $exito = (count($usuarios_buscados) == 0)? false : true;
+                $exito = (count($ingresos_descuentos_buscados) == 0)? false : true;
             }
-            return $this->data_vista('buscar', $exito, $usuarios_buscados, $termino);
+            return $this->data_vista('buscar', $exito, $ingresos_descuentos_buscados, $termino);
         }
-        return redirect()->to(base_url() . '/usuarios');
+        return redirect()->to(base_url() . '/ingresos_descuentos');
     }
 	
 }
