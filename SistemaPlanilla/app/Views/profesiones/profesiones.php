@@ -16,7 +16,7 @@
 
 
 <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Buscar" aria-label="Search" id="busqueda" onkeyup="Buscar()">
+        <input class="form-control form-control-navbar" type="search" placeholder="Buscar" aria-label="Search" id="busqueda" onkeyup="Alerta()">
         <div class="input-group-append">
         <button class="btn btn-secondary" disabled>
                     <i class="fas fa-search"></i>

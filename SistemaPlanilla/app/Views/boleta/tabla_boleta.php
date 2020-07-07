@@ -12,7 +12,7 @@
   <?php foreach ($boletas as $boleta): ?>
     <tr>
     <th scope="row" class='idelemento' hidden="true"><?= $boleta['ID_EMPLEADO'] ?></th>
-      <td><?= $boleta['nombre_c'] ?></td>
+      <td><?= $boleta['NOMBRE_C'] ?></td>
       <td><?= $boleta['NUMERO_DOCUMENTO'] ?></td>
 	  <td class="codigo_p"><?= $boleta['CODIGO'] ?></td>
       <td>

@@ -57,7 +57,7 @@ echo view('empresa/subsecciones/busqueda');
 <div class="modal" id="unidadesModal" tabindex="-1" role="dialog" aria-labelledby="unidadesModalLabel" aria-hidden="true">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="generoModalLabel">Crear nueva seccion</h5>
+                <h5 class="modal-title" id="generoModalLabel">Crear nueva subseccion</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -67,7 +67,7 @@ echo view('empresa/subsecciones/busqueda');
 
                 <input type="hidden" name="ID_SUB_SECCION" id="ID_SUB_SECCION">
                     <div class="form-group">
-                        <label for="">Nombre de la seccion</label>
+                        <label for="">Nombre de la Subseccion</label>
                         <input name="NOMBRE_SUB_SECCION" id="NOMBRE_SUB_SECCION" onkeyup="validar_nombre(this)" onblur="validar_nombre(this)" type="text" class="form-control" require placeholder="ingrese el nombre de la seccion">
                         <div class="invalid-feedback" style="display:none">
                         El nombre no debe comenzar con números ni caracteres especiales
