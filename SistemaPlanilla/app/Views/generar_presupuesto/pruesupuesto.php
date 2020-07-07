@@ -35,17 +35,13 @@
 
 $(document).on("click","#presupuesto_fecha",function(){ 
     //codigo
-   
+   //codigo para imprimir
    
     var hasta  =  $('#hasta').val();
 
 
       window.open('../generar_presupuesto/imprimir/'+hasta);
   
-
-
-    
-
 
   
       });
