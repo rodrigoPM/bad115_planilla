@@ -8,16 +8,12 @@ use App\Models\MenusModel;
 use App\Models\PermisosModel;
 
 
+
 class Roles extends BaseController
 {
-    protected $nombre_clase = 'roles';
-
-    public function index()
+    protected function data_vista($operacion = '', $exito = false, $roles = [], $termino = '')
     {
-        $roles = new RolesModel();
-        //$menus = (new MenusModel())->get();
-
-        $datos= $roles->paginate(10);
+        $roles  = ($roles == []) ? (new RolesModel())->get() : $roles;
 
         $db = \Config\Database::connect();
         $rol = session()->get('ID_ROL');
@@ -54,71 +50,98 @@ class Roles extends BaseController
                 }
             }
 
-       
         $data = [
-            'roles' =>$datos,
-            'menus' =>$menus,
-            'paginador'=>$roles->pager
+            'menus'         => $menus,
+            'roles'         => $roles,
+            'operacion'     => $operacion,
+            'exito'         => $exito,
+            'nombre_obj'    => 'Rol',
+            'termino'       => $termino,
+            'url_guardar'   => base_url() . '/roles/guardar',
+            'url_eliminar'  => base_url() . '/roles/eliminar',
+            'url_buscar'    => base_url() . '/roles/buscar',
         ];
-        return crear_plantilla(view('roles/roles', $data));
+        return crear_head('Roles')
+            . crear_body(
+                view('roles/roles', $data),               //main
+                '',                                           //sidebar
+                crear_breadcrumb('Roles', crear_ruta_breadcrumb('Roles')),   //breadcrumb
+                ['roles/roles.js']
+            );
     }
 
-    public function view($par ='')
+    public function index()
     {
-        $roles = new RolesModel();
-        $menus = (new MenusModel())->get();
-        $datos = $roles->paginate(10);
-        if ($par==''){
-            $data = [
-                'roles' => $datos
-            ];
+        return $this->data_vista();
+    }
 
-            return view('roles/busqueda', $data);
+    public function guardar()
+    {
+        if ($this->request->getMethod() == 'post') {
+            $exito = false;
+            if ($this->validate([
+                'NOMBRE_ROL'   => 'required|string'
+            ])) {
+                (new RolesModel())->save([
+                    'ID_ROL'        => $this->request->getVar('ID_ROL'),
+                    'NOMBRE_ROL'    => $this->request->getVar('NOMBRE_ROL')
+                ]);
 
+                $nombre = $this->request->getVar('NOMBRE_ROL');
 
-        }else{
+                $idrol = (new RolesModel())->where('NOMBRE_ROL', $nombre)->first();
 
-            $datos = $roles->like('NOMBRE_ROL',strtoupper($par))->paginate(10);
-            $data['roles'] = $datos;
-            return view('roles/busqueda', $data);
+                foreach( $_POST['menu'] as $permiso ) {
+
+                    (new PermisosModel())->save([
+                        'ID_PERMISO'    => $this->request->getVar('ID_PERMISO'),
+                        'ID_ROL'        => $idrol["ID_ROL"],
+                        'ID_MENU'       => $permiso
+                    ]);
+
+                }
+                $exito = true;
+            }
+            return $this->data_vista('guardar', $exito);
+
         }
-
-
-    }
-    public function delete($id = NULL)
-    {
-        $roles = new RolesModel();
-        $roles->delete($id);
-        $data = [
-            'roles' => $roles->get()
-        ];
-        return view('roles/busqueda', $data);
+        return redirect()->to(base_url() . '/roles');
     }
 
-
-    //--------------------------------------------------------------------
-    public function nuevo()
+    public function eliminar()
     {
-        (new RolesModel())->save([
-            'ID_ROL' => strtoupper($this->request->getVar('ID_ROL')),
-            'NOMBRE_ROL' =>strtoupper( $this->request->getVar('NOMBRE_ROL'))
-        ]);
-
-        $rol = $this->request->getVar('ID_ROL');
-        foreach($this->request->getVar('menu[]') as $menu)
-        {
-            (new PermisosModel())->save([
-                'ID_ROL'    => $rol,
-                'ID_MENU'   => $menu,
-            ]);
+        if ($this->request->getMethod() == 'post') {
+            $exito = false;
+            if ($this->validate([
+                'ID_ROL'   => 'required|numeric'
+            ])) {
+                (new RolesModel())->where('ID_ROL', $this->request->getVar('ID_ROL'))->delete();
+                $exito = true;
+            }
+            return $this->data_vista('eliminar', $exito);
         }
-        $roles = new RolesModel();
-        $data = [
-           'roles' => $roles->get()
-       ];
-   
-       
-      return view('roles/busqueda', $data);
+        return redirect()->to(base_url() . '/roles');
     }
 
+    public function buscar()
+    {
+        if ($this->request->getMethod() == 'post') {
+            $exito = false;
+            $termino = '';
+            $roles = [];
+            if ($this->validate([
+                'termino'   => 'required|string'
+            ])) {
+                $termino = trim($this->request->getVar('termino'));
+                if ($termino != '') {
+                    $roles = (new RolesModel())
+                        ->like('NOMBRE_ROL', $termino)
+                        ->findAll();
+                }
+                $exito = (count($roles) == 0) ? false : true;
+            }
+            return $this->data_vista('buscar', $exito, $roles, $termino);
+        }
+        return redirect()->to(base_url() . '/roles');
+    }
 }
