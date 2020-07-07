@@ -25,7 +25,7 @@ class Descuentos_eventuales extends BaseController
             'planillasModel'=> new PlanillasModel(),
 			'operacion'		=> $operacion,
 			'exito' 		=> $exito,
-			'nombre_obj'    => 'Descuento Programado',
+			'nombre_obj'    => 'Descuento Eventuales',
 			'termino'       => $termino,
 			'url_guardar'	=> base_url() . '/descuentos_eventuales/guardar',
 			'url_eliminar'  => base_url() . '/descuentos_eventuales/eliminar',
