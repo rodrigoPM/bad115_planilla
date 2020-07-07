@@ -1,6 +1,6 @@
 function editar_estado(
     ID_CODIGO,
-    ID_TIPO_MOVIMIENTO = 0,
+    ID_TIPO_MOVIMIENTO,
     NOMBRE_CONCEPTO,
     APLICA_SEGURO,
     APLICA_AFP,

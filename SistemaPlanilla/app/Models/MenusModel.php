@@ -26,4 +26,8 @@ class MenusModel extends Model
 			return [$this->find($id)];
 		}
 	}
+
+	function get_last_menu(){
+        return $this->orderBy('ID_MENU', 'desc')->first();
+    }
 }

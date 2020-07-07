@@ -35,7 +35,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-
+            <?php if (isset($menu['submenus'])) : ?>
             <?php foreach ($menu['submenus'] as $submenu): ?>
                 <li class="nav-item">
                   <a href="<?= base_url().'/'.$submenu["RUTA_MENU"] ?>" class="nav-link">
@@ -44,6 +44,7 @@
                   </a>
                 </li>
               <?php endforeach; ?>
+            <?php endif ?>
             </ul>
           </li>
           <?php endforeach; ?>

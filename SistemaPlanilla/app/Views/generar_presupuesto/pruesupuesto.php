@@ -30,34 +30,7 @@
 
 
   <script>
-  $(document).on("onkeyup","#hasta",function(){ 
-    //codigo
-   
-    var date = new Date();
-var primerDia = new Date(date.getFullYear(), date.getMonth(), 1);
-   
-    var hasta  =  $('#hasta').val();
-
-    if (hasta=='01/07/2020')
-    {
-
-     $('#hasta').removeClass("is-valid");
-     $('#hasta').addClass("is-invalid");
-     $('#hasta').next().css("display", "block");
-     $("#btn_submit").removeAttr('disabled');
-
-
-    }else{
-
-      window.open('../generar_presupuesto/imprimir/'+hasta);
   
-
-
-    }
-
-
-  
-      });
 
 
 $(document).on("click","#presupuesto_fecha",function(){ 

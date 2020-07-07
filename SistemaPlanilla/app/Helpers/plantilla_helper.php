@@ -120,7 +120,7 @@ function crear_sidebar(
                     'ID_ICONO'      => $query->ID_ICONO,
                     'NOMBRE_ICONO'  => $query->NOMBRE_ICONO,
                 );
-
+                
                 foreach ($submenus->getResult() as $submenu) {
                     $menus["$query->ID_MENU"]["submenus"]["$submenu->ID_MENU"] = array(
                         "NOMBRE_MENU"   => $submenu->NOMBRE_MENU,
@@ -130,6 +130,7 @@ function crear_sidebar(
                         "RUTA_MENU"     => $submenu->RUTA_MENU,
                     );
                 }
+                
             }
 
         } else {
